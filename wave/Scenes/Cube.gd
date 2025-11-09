@@ -4,7 +4,11 @@ extends RigidBody3D
 @export var float_force :float = 1.0
 @export var water_drag :float = 0.05
 @export var water_angular_drag := 0.05
+@export var float_offset:float = 0.0
 
+@export var floatiesnode:Node3D
+
+@onready var floaties:Array = floatiesnode.get_children()
 
 @onready var gravity :float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -18,14 +22,14 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	var depth = water_height - global_position.y
-	print(depth)
-	if depth >0:
-		submerged = true
-		apply_central_force(Vector3.UP* float_force * gravity * depth)
-	else:
-		submerged = false
+func _physics_process(delta: float) -> void:
+	submerged = false
+	for f in floaties:
+		var depth = - global_position.y + float_offset + $"../OutsetOcean".get_wave_height_at(f.global_position.x,global_position.z)
+		if depth >0:
+			submerged = true
+			apply_force(Vector3.UP* float_force * gravity * depth, f.global_position - global_position)
+		#print(depth)
 	pass
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:

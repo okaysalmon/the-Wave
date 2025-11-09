@@ -23,6 +23,8 @@ render_mode blend_mix,depth_draw_always,cull_disabled,diffuse_burley,specular_sc
 #define DEPTH_FOG_FADE // control depth fade because the depth buffer is imprecise at far distances
 #define REFRACTION_SCALING // refraction refracts distant objects way too much; scale it down with distance.
 
+uniform float wave_time = 0.0;
+
 uniform bool freeze_time = false; // Toki wo tomare.
 uniform vec4 albedo: source_color;
 uniform vec4 albedo_fresnel: source_color;
@@ -194,7 +196,7 @@ vec3 rotate_to_normal(vec3 point, vec3 normal)
 }
 
 void vertex() {
-	float time = TIME; //TIME;
+	float time = wave_time; //TIME;
 	
 	time = time * float(!freeze_time);
 	
