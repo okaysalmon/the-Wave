@@ -1,0 +1,54 @@
+[gd_scene load_steps=13 format=3 uid="uid://b2lf28ap3u3o0"]
+
+[ext_resource type="Shader" uid="uid://c70rs3a7nbva2" path="res://SkyShader/SkyShader.tres" id="1_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://b1ifm0554gtdb" path="res://addons/boujie_water_shader/prefabs/outset_ocean.tscn" id="2_8gbba"]
+[ext_resource type="Gradient" uid="uid://bss21d0wfnjfq" path="res://SkyShader/colourRampSky.tres" id="2_jjvhh"]
+[ext_resource type="Texture2D" uid="uid://bv6kbobq5gbe8" path="res://SkyShader/box5.png" id="3_jjvhh"]
+[ext_resource type="Script" uid="uid://bidyklu47r0k2" path="res://Scenes/Cube.gd" id="5_kry3j"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jjvhh"]
+noise = SubResource("FastNoiseLite_8gbba")
+color_ramp = ExtResource("2_jjvhh")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjvhh"]
+shader = ExtResource("1_bo1nx")
+shader_parameter/Texture2DParameter = ExtResource("3_jjvhh")
+shader_parameter/Vector2Parameter2 = Vector2(0, 0)
+shader_parameter/SkyTexture = SubResource("NoiseTexture2D_jjvhh")
+
+[sub_resource type="Sky" id="Sky_kry3j"]
+sky_material = SubResource("ShaderMaterial_jjvhh")
+
+[sub_resource type="Environment" id="Environment_21xkr"]
+background_mode = 2
+sky = SubResource("Sky_kry3j")
+
+[sub_resource type="BoxMesh" id="BoxMesh_21xkr"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6bp64"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_21xkr")
+
+[node name="OutsetOcean" parent="." instance=ExtResource("2_8gbba")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31085634, 0, 0.45859802)
+far_edge = 4000
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.49067566, -0.59602016, 0.6356079, 0, 0.72945833, 0.6840253, -0.8713423, 0.33563453, -0.35792744, 3.513794, 2.4682503, -1.3564873)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+script = ExtResource("5_kry3j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_21xkr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_6bp64")
