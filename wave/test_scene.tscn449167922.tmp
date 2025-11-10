@@ -1,0 +1,69 @@
+[gd_scene load_steps=15 format=3 uid="uid://fw5pu171811"]
+
+[ext_resource type="Shader" uid="uid://c70rs3a7nbva2" path="res://SkyShader/SkyShader.tres" id="1_2nij2"]
+[ext_resource type="Gradient" uid="uid://bss21d0wfnjfq" path="res://SkyShader/colourRampSky.tres" id="2_7cbxl"]
+[ext_resource type="Texture2D" uid="uid://bv6kbobq5gbe8" path="res://SkyShader/box5.png" id="3_8pr8v"]
+[ext_resource type="Script" uid="uid://dhu6366trm6mr" path="res://RBCharacter/RB_character+controler.gd" id="4_buypi"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vr1i5"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_coq8p"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rpuu0"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jjvhh"]
+noise = SubResource("FastNoiseLite_rpuu0")
+color_ramp = ExtResource("2_7cbxl")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oo8pe"]
+shader = ExtResource("1_2nij2")
+shader_parameter/Texture2DParameter = ExtResource("3_8pr8v")
+shader_parameter/Vector2Parameter2 = Vector2(0, 0)
+shader_parameter/SkyTexture = SubResource("NoiseTexture2D_jjvhh")
+
+[sub_resource type="Sky" id="Sky_kry3j"]
+sky_material = SubResource("ShaderMaterial_oo8pe")
+
+[sub_resource type="Environment" id="Environment_4gito"]
+background_mode = 2
+sky = SubResource("Sky_kry3j")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fbuy2"]
+friction = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_0k8yu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hiucn"]
+
+[node name="TestScene" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019905329, -0.026967287, 0.027661324)
+mesh = SubResource("BoxMesh_vr1i5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019905329, 0.026967287, -0.027661324)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_coq8p")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MeshInstance3D"]
+environment = SubResource("Environment_4gito")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4729664, 0)
+physics_material_override = SubResource("PhysicsMaterial_fbuy2")
+script = ExtResource("4_buypi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D/RigidBody3D2"]
+mesh = SubResource("BoxMesh_0k8yu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/RigidBody3D2"]
+shape = SubResource("BoxShape3D_hiucn")
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D/RigidBody3D2"]
+transform = Transform3D(-0.49067566, -0.59602016, 0.6356079, 0, 0.72945833, 0.6840253, -0.8713423, 0.33563453, -0.35792744, 6.8139057, 5.628886, -3.1377096)

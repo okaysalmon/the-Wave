@@ -1,0 +1,52 @@
+[gd_scene load_steps=12 format=3 uid="uid://fw5pu171811"]
+
+[ext_resource type="Shader" uid="uid://c70rs3a7nbva2" path="res://SkyShader/SkyShader.tres" id="1_2nij2"]
+[ext_resource type="Gradient" uid="uid://bss21d0wfnjfq" path="res://SkyShader/colourRampSky.tres" id="2_7cbxl"]
+[ext_resource type="Texture2D" uid="uid://bv6kbobq5gbe8" path="res://SkyShader/box5.png" id="3_8pr8v"]
+[ext_resource type="PackedScene" uid="uid://d4j8c2bite2cd" path="res://RBCharacter/RB_Char.tscn" id="4_coq8p"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vr1i5"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_coq8p"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rpuu0"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jjvhh"]
+noise = SubResource("FastNoiseLite_rpuu0")
+color_ramp = ExtResource("2_7cbxl")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oo8pe"]
+shader = ExtResource("1_2nij2")
+shader_parameter/Texture2DParameter = ExtResource("3_8pr8v")
+shader_parameter/Vector2Parameter2 = Vector2(0, 0)
+shader_parameter/SkyTexture = SubResource("NoiseTexture2D_jjvhh")
+
+[sub_resource type="Sky" id="Sky_kry3j"]
+sky_material = SubResource("ShaderMaterial_oo8pe")
+
+[sub_resource type="Environment" id="Environment_4gito"]
+background_mode = 2
+sky = SubResource("Sky_kry3j")
+
+[node name="TestScene" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019905329, -0.026967287, 0.027661324)
+mesh = SubResource("BoxMesh_vr1i5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019905329, 0.026967287, -0.027661324)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_coq8p")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="MeshInstance3D"]
+environment = SubResource("Environment_4gito")
+
+[node name="RigidBody3D2" parent="MeshInstance3D" instance=ExtResource("4_coq8p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4729664, 0)
+mass = 1.0

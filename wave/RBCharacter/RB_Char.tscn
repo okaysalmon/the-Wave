@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4j8c2bite2cd"]
+
+[ext_resource type="Script" uid="uid://dhu6366trm6mr" path="res://RBCharacter/RB_character+controler.gd" id="1_sjwds"]
+[ext_resource type="Script" uid="uid://bo3elqcb32ddg" path="res://RBCharacter/CharGroundFinder.gd" id="2_41y84"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fbuy2"]
+friction = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_41y84"]
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_32wsq"]
+radius = 0.4
+height = 1.8
+
+[node name="RigidBody3D2" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_fbuy2")
+script = ExtResource("1_sjwds")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_41y84")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_32wsq")
+
+[node name="CamSwivle" type="Node3D" parent="."]
+transform = Transform3D(-0.6739286, 0, -0.7387965, 0, 1, 0, 0.7387965, 0, -0.6739286, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CamSwivle"]
+transform = Transform3D(1, 0, 0, 0, 0.7289686, 0.6845471, 0, -0.6845471, 0.7289686, 0, 4.0683346, 4.236286)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="GroundRayCast" type="RayCast3D" parent="Marker3D"]
+unique_name_in_owner = true
+top_level = true
+target_position = Vector3(0, -1.1, 0)
+script = ExtResource("2_41y84")
