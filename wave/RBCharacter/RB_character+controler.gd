@@ -1,15 +1,15 @@
-extends RigidBody3D
+extends FloatingRigidBody3d
 
 @export var camera:Node3D = defaltCame
 
 @onready var defaltCame = $CamSwivle
-var acceleration:float = 5.0
+var acceleration:float = 15.0
 var accelerationMultiplier:float = 1.5
 var jumpVelocity:float = 10.0
 #var _pid = Pid3D.new(1.0,0.1,1.0)
 const SPEED:float = 15.0
 const MAXSPEED:float = 25
-var stopSpeed:float = 0.5
+var stopSpeed:float = 0.1
 var grounded:bool = false
 var moveInput:Vector2
 var velocity:Vector3
@@ -24,6 +24,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	_physics_float(delta)
 	#print(linear_velocity)
 	## need to ad a check in int_forc where if new velovity is more then a 90 deg dif or even 120, then set linerar velocity to 0,0,0
 	prev_velocity = velocity
@@ -33,18 +34,34 @@ func _physics_process(delta: float) -> void:
 		var dir = Vector3.ZERO
 		dir += moveInput.x*camera.global_basis.x
 		dir -= moveInput.y*camera.global_basis.z
-		##prevent Y Push
+		##prevent Y infuance form camera
 		dir = Vector3(dir.x,0,dir.z)
-		velocity = lerp(velocity,dir*SPEED,acceleration* accelerationMultiplier*delta)
+		var goundNormals:Vector3 = %GroundRayCast.get_collision_normal()
+		dir = dir.slide(goundNormals.normalized())
+		#print("pre " +str(velocity))
+		velocity = lerp(velocity,dir*SPEED*mass,acceleration* accelerationMultiplier*delta)
+		#print(velocity)
 		apply_central_force(velocity)
-	
-
+		#print(goundNormals)
+		if goundNormals.y <=0.95:
+			#print("im multiplying and loosing control")
+			apply_central_force(-goundNormals*gravity)
+			var gravRist = Vector3(0,goundNormals.y*mass*gravity/2,0)
+			apply_central_force(gravRist)
+			
+		
+#need to creat a slide state, if in slide then this logic is changed to prevend sudden stop
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	_integrate_float(state)
 	if state.linear_velocity.length()>MAXSPEED and grounded:
 		state.linear_velocity = state.linear_velocity.normalized()*MAXSPEED
 	if moveInput.length() <0.2 and grounded:
-		state.linear_velocity.x = lerp(state.linear_velocity.x, 0.0,stopSpeed)
-		state.linear_velocity.z = lerp(state.linear_velocity.z, 0.0,stopSpeed)
+		state.linear_velocity = lerp(state.linear_velocity,Vector3.ZERO,(1/60)/stopSpeed)
+		#state.linear_velocity.x = lerp(state.linear_velocity.x, 0.0,stopSpeed)
+		#state.linear_velocity.z = lerp(state.linear_velocity.z, 0.0,stopSpeed)
+		if %GroundRayCast.get_collision_normal().y <=0.95 and state.linear_velocity.y > 0.5:
+			state.linear_velocity.y = 0
+		
 
 func _is_grounded()->bool:
 	%GroundRayCast.force_raycast_update()

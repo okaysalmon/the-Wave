@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://fw5pu171811"]
+[gd_scene load_steps=13 format=3 uid="uid://fw5pu171811"]
 
 [ext_resource type="Shader" uid="uid://c70rs3a7nbva2" path="res://SkyShader/SkyShader.tres" id="1_2nij2"]
 [ext_resource type="Gradient" uid="uid://bss21d0wfnjfq" path="res://SkyShader/colourRampSky.tres" id="2_7cbxl"]
@@ -7,6 +7,8 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_vr1i5"]
 size = Vector3(20, 1, 20)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_coq8p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_coq8p"]
 size = Vector3(20, 1, 20)
@@ -35,11 +37,15 @@ sky = SubResource("Sky_kry3j")
 [node name="TestScene" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019905329, -0.026967287, 0.027661324)
+transform = Transform3D(1, 0, 0, 0, 0.9279924, -0.3725991, 0, 0.3725991, 0.9279924, -0.019905329, -0.026967287, 0.027661324)
 mesh = SubResource("BoxMesh_vr1i5")
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.027712297, 8.258907e-10, 0.99961597, -0.372456, 0.9279925, -0.010325577, -0.92763615, -0.3725991, -0.025716804, 17.907307, 1.5417788, -1.1746243)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019905329, 0.026967287, -0.027661324)
+physics_material_override = SubResource("PhysicsMaterial_coq8p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_coq8p")
@@ -47,6 +53,18 @@ shape = SubResource("BoxShape3D_coq8p")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="MeshInstance3D"]
 environment = SubResource("Environment_4gito")
 
-[node name="RigidBody3D2" parent="MeshInstance3D" instance=ExtResource("4_coq8p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4729664, 0)
-mass = 1.0
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.019905329, -0.026967287, 0.027661324)
+mesh = SubResource("BoxMesh_vr1i5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019905329, 0.026967287, -0.027661324)
+physics_material_override = SubResource("PhysicsMaterial_coq8p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D"]
+shape = SubResource("BoxShape3D_coq8p")
+
+[node name="RigidBody3D2" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_coq8p")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.019905329, 3.1959193, 1.3216854)
+camera = NodePath("../MeshInstance3D/Camera3D")
+float_force = 1.0

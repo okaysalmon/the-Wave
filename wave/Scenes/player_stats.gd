@@ -1,0 +1,65 @@
+extends Node
+
+signal OutOfMana
+
+@export var MaxMana:float = 30:
+	set(newVal):
+		MaxMana = newVal
+		if manaBar != null:
+			manaBar.max_value = MaxMana
+
+@onready var manaBar:ProgressBar = get_tree().get_first_node_in_group("manaBar")
+
+var currentMana:float = MaxMana:
+	set(newValue):
+		if newValue >MaxMana:
+			newValue = MaxMana
+		currentMana = newValue
+		if manaBar != null:
+			#print()
+			manaBar.value = newValue
+			manaBar.max_value = MaxMana
+
+var casting:bool = false:
+	set(newVale):
+		if newVale and _EnoughManaToCast(CastRate):
+			print("thre was enough to cast")
+			casting = true
+			finshedCastingCD = null
+		else:
+			casting = false
+		if casting:
+			regenMana = false
+		else:
+			var CD:SceneTreeTimer = get_tree().create_timer(3)
+			finshedCastingCD = CD
+			await CD.timeout
+			print("i waited i realy did")
+			if finshedCastingCD == CD:
+				regenMana = true
+
+var finshedCastingCD:SceneTreeTimer
+
+var regenMana: bool = true
+var RegenRate: float =10
+var CastRate: float  = 2
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if casting:
+		currentMana -= (CastRate*delta)
+		if !_EnoughManaToCast(CastRate*delta):
+			casting = false
+	elif regenMana:
+		currentMana += (RegenRate*delta)
+	pass
+
+func _EnoughManaToCast(CastCost:float)->bool:
+	if currentMana < CastRate:
+		emit_signal("OutOfMana")
+	return currentMana > CastRate

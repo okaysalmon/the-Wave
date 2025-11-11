@@ -127,24 +127,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.254461, 2, -9.842275)
 [node name="PlacementHandler" type="Node3D" parent="." groups=["PlacementHandler"]]
 script = ExtResource("9_hptm8")
 
-[node name="PlayerStats" type="Node" parent="." groups=["PlayStats"]]
+[node name="PlayerStats" type="Node" parent="."]
 script = ExtResource("10_hptm8")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="ManaBar" type="ProgressBar" parent="CanvasLayer/Control" groups=["manaBar"]]
-custom_minimum_size = Vector2(400, 50)
-layout_mode = 0
-offset_right = 4.0
-offset_bottom = 27.0
-max_value = 60.0
-value = 60.0

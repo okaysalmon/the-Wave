@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b170fdr280hse"]
+
+[ext_resource type="Script" uid="uid://b5p2tcku1bg1v" path="res://FloatItems/placment_display.gd" id="1_ppxop"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lysua"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppxop"]
+transparency = 4
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_color = Color(0.0627451, 1, 0.09411765, 0.19215687)
+
+[node name="PlacmentDisplay" type="Node3D"]
+script = ExtResource("1_ppxop")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_lysua")
+surface_material_override/0 = SubResource("StandardMaterial3D_ppxop")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
