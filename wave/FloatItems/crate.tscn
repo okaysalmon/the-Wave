@@ -26,6 +26,8 @@ mass = 5.0
 script = ExtResource("1_uel0a")
 placementScene = ExtResource("2_r5o71")
 moveUpForce = 5.0
+float_force = 1.1
+float_offset = 0.5
 floatiesnode = NodePath("floats")
 metadata/_custom_type_script = "uid://dsl2p21gugq8e"
 

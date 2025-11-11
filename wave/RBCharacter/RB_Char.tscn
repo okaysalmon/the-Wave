@@ -19,7 +19,8 @@ axis_lock_angular_z = true
 mass = 40.0
 physics_material_override = SubResource("PhysicsMaterial_fbuy2")
 script = ExtResource("1_sjwds")
-float_force = 40.0
+float_force = 1.1
+float_offset = 0.5
 floatiesnode = NodePath("Marker3D2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

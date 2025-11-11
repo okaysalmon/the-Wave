@@ -6,6 +6,7 @@ extends FloatingRigidBody3d
 @export var floatDownDist:float = 2
 
 @onready var placementHandlerNode = get_tree().get_first_node_in_group("PlacementHandler")
+@onready var playerStats:Node = get_tree().get_first_node_in_group("PlayStats")
 
 var channeling:bool = false:
 	set(newValue):
@@ -32,6 +33,7 @@ var goingUpTimer:SceneTreeTimer
 var moveingToPlacement:bool = false
 var movingToPos:Vector3
 var maxMoveToSpeed:float = 5
+var currentImmune:bool = true
 
 var highlight:bool = false:
 	set(newVal):
@@ -41,6 +43,8 @@ var highlight:bool = false:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	await get_tree().create_timer(10).timeout
+	currentImmune = false
 	pass # Replace with function body.
 
 
@@ -58,6 +62,7 @@ func _physics_process(delta: float) -> void:
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	_integrate_float(state)
+	apply_current(state)
 	if GoingUp and linear_velocity.y >moveUpClampSpeed:
 		linear_velocity.y = moveUpClampSpeed
 	if moveingToPlacement:
@@ -73,6 +78,11 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 			
 			
 
+
+func apply_current(state: PhysicsDirectBodyState3D):
+	if submerged and !channeling and !currentImmune:
+		var current:Vector3 = Vector3(playerStats.water_current.x,0,playerStats.water_current.y)
+		apply_central_force(current)
 
 func _on_mouse_entered() -> void:
 	if placementHandlerNode.PlacementItem ==null or placementHandlerNode == null:

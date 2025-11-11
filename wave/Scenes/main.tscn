@@ -63,8 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31085634, 0, 0.45859802)
 mass = 8000.0
 physics_material_override = SubResource("PhysicsMaterial_344ge")
 script = ExtResource("5_kry3j")
-float_force = 1600.0
-float_offset = 1.0
+float_offset = 1.5
 floatiesnode = NodePath("floats")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
@@ -107,22 +106,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21644783, 2.1217723, 0.158
 camera = NodePath("../Camera3D")
 
 [node name="Crate" parent="." instance=ExtResource("7_6bp64")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.778242, 1, -15.887892)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.778242, -5.7464347, -15.887892)
 
 [node name="Crate2" parent="." instance=ExtResource("7_6bp64")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.841692, 1, -9.104376)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.841692, -5.7464347, -9.104376)
 
 [node name="Crate3" parent="." instance=ExtResource("7_6bp64")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.656628, 1.0000019, -8.709786)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.656628, -5.7464347, -8.709786)
 
 [node name="Crate4" parent="." instance=ExtResource("7_6bp64")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.712294, 1, -10.403137)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.712294, -5.7464347, -10.403137)
 
 [node name="Crate5" parent="." instance=ExtResource("7_6bp64")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.584525, 1, -9.645458)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.584525, -5.7464347, -9.645458)
 
 [node name="Crate6" parent="." instance=ExtResource("7_6bp64")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.254461, 2, -9.842275)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.254461, -4.7464347, -9.842275)
 
 [node name="PlacementHandler" type="Node3D" parent="." groups=["PlacementHandler"]]
 script = ExtResource("9_hptm8")

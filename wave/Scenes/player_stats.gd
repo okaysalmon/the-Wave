@@ -43,11 +43,25 @@ var finshedCastingCD:SceneTreeTimer
 var regenMana: bool = true
 var RegenRate: float =10
 var CastRate: float  = 2
+var currentChangeTime:float = 10
+
+var water_current:Vector2 = Vector2(10,10)#Vector2(randf_range(-5.0,5.0),randf_range(-5.0,5.0))
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_random_Current_rep()
 	pass # Replace with function body.
 
+func _random_Current():
+	var randomVec:Vector2 = Vector2(randf_range(10.0,50.0),randf_range(10.0,50.0))
+	if randi_range(1,10)>5:
+		randomVec = randomVec*-1
+	return randomVec
+
+func _random_Current_rep():
+	water_current = _random_Current()
+	await get_tree().create_timer(currentChangeTime).timeout
+	_random_Current_rep()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

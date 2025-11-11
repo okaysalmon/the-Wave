@@ -5,7 +5,7 @@ extends FloatingRigidBody3d
 @onready var defaltCame = $CamSwivle
 var acceleration:float = 15.0
 var accelerationMultiplier:float = 1.5
-var jumpVelocity:float = 10.0
+var jumpVelocity:float = 40.0
 #var _pid = Pid3D.new(1.0,0.1,1.0)
 const SPEED:float = 15.0
 const MAXSPEED:float = 25
@@ -14,7 +14,15 @@ var grounded:bool = false
 var moveInput:Vector2
 var velocity:Vector3
 var prev_velocity:Vector3
-
+var landCoolDownOnJumpTime:float = 0.2
+var landCoolDownOnJump:bool =false:
+	set(newVal):
+		if newVal:
+			landCoolDownOnJump = true
+			await get_tree().create_timer(landCoolDownOnJumpTime).timeout
+			landCoolDownOnJump = false
+		else:
+			landCoolDownOnJump=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if camera == null:
@@ -43,12 +51,33 @@ func _physics_process(delta: float) -> void:
 		#print(velocity)
 		apply_central_force(velocity)
 		#print(goundNormals)
+		if !landCoolDownOnJump and Input.is_action_just_pressed("move_jump"):
+			landCoolDownOnJump = true
+			grounded = false
+			apply_central_force(Vector3.UP*mass*gravity*gravity_scale*jumpVelocity)
 		if goundNormals.y <=0.95:
 			#print("im multiplying and loosing control")
 			apply_central_force(-goundNormals*gravity)
 			var gravRist = Vector3(0,goundNormals.y*mass*gravity/2,0)
 			apply_central_force(gravRist)
-			
+	if submerged:
+		if !landCoolDownOnJump and Input.is_action_just_pressed("move_jump"):
+			landCoolDownOnJump = true
+			grounded = false
+			apply_central_force(Vector3.UP*mass*gravity*gravity_scale*jumpVelocity*1.2)
+		moveInput = Input.get_vector("move_left","move_right","move_down","move_up")
+		var dir = Vector3.ZERO
+		dir += moveInput.x*camera.global_basis.x
+		dir -= moveInput.y*camera.global_basis.z
+		##prevent Y infuance form camera
+		dir = Vector3(dir.x,0,dir.z)
+		var goundNormals:Vector3 = %GroundRayCast.get_collision_normal()
+		dir = dir.slide(goundNormals.normalized())
+		#print("pre " +str(velocity))
+		velocity = lerp(velocity,dir*SPEED*mass,acceleration* accelerationMultiplier*delta)
+		#print(velocity)
+		apply_central_force(velocity)
+		
 		
 #need to creat a slide state, if in slide then this logic is changed to prevend sudden stop
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
@@ -64,5 +93,8 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		
 
 func _is_grounded()->bool:
-	%GroundRayCast.force_raycast_update()
-	return %GroundRayCast.is_colliding()
+	if !landCoolDownOnJump:
+		%GroundRayCast.force_raycast_update()
+		return %GroundRayCast.is_colliding()
+	else:
+		return false

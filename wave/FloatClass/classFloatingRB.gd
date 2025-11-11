@@ -37,7 +37,7 @@ func _physics_float(delta:float) -> void:
 			var depth = - global_position.y + float_offset + $"../OutsetOcean".get_wave_height_at(f.global_position.x,global_position.z)
 			if depth >0:
 				submerged = true
-				apply_force(Vector3.UP* float_force * gravity * depth, f.global_position - global_position)
+				apply_force(Vector3.UP* float_force *(mass/floaties.size()) * gravity*gravity_scale * clampf(depth,0.2,5) , f.global_position - global_position)
 			#print(depth)
 
 func _integrate_float(state: PhysicsDirectBodyState3D)-> void:
