@@ -15,6 +15,10 @@ run/main_scene="uid://b2lf28ap3u3o0"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/OSIK/plugin.cfg", "res://addons/boujie_water_shader/plugin.cfg")
+
 [global_group]
 
 sheildAffects=""

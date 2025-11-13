@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b2lf28ap3u3o0"]
+[gd_scene load_steps=45 format=3 uid="uid://b2lf28ap3u3o0"]
 
 [ext_resource type="Shader" uid="uid://c70rs3a7nbva2" path="res://SkyShader/SkyShader.tres" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://b1ifm0554gtdb" path="res://addons/boujie_water_shader/prefabs/outset_ocean.tscn" id="2_8gbba"]
@@ -13,6 +13,9 @@
 [ext_resource type="Script" uid="uid://b6jg87yr2f1h8" path="res://Scenes/placement_handler.gd" id="9_hptm8"]
 [ext_resource type="Texture2D" uid="uid://dnqegf8mxqli" path="res://addons/nojoule-energy-shield/shield_noise.tres" id="9_wsu2k"]
 [ext_resource type="Script" uid="uid://caq2h6lmf1k54" path="res://Scenes/player_stats.gd" id="10_hptm8"]
+[ext_resource type="PackedScene" uid="uid://dt1340cijt1gd" path="res://Scenes/tentical/tentical_2.tscn" id="14_jkdf5"]
+[ext_resource type="Script" uid="uid://8eimvlejjjsh" path="res://Scenes/tentical/tentical_2.gd" id="15_k12tt"]
+[ext_resource type="Script" uid="uid://dj2fma4aphiml" path="res://addons/OSIK/constraints.gd" id="15_wsu2k"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
 noise_type = 3
@@ -111,6 +114,100 @@ size = Vector3(10, 1, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kry3j"]
 size = Vector3(10, 1, 10)
+
+[sub_resource type="Resource" id="Resource_k12tt"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.015"
+
+[sub_resource type="Resource" id="Resource_h1bgf"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.014"
+
+[sub_resource type="Resource" id="Resource_b3802"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.013"
+
+[sub_resource type="Resource" id="Resource_fevyy"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.012"
+
+[sub_resource type="Resource" id="Resource_hibaj"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.011"
+
+[sub_resource type="Resource" id="Resource_pdsj5"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.010"
+
+[sub_resource type="Resource" id="Resource_ee4r6"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.009"
+
+[sub_resource type="Resource" id="Resource_gt3je"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.008"
+
+[sub_resource type="Resource" id="Resource_3pmx8"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.007"
+
+[sub_resource type="Resource" id="Resource_u50mg"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.006"
+
+[sub_resource type="Resource" id="Resource_cbgmd"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.005"
+
+[sub_resource type="Resource" id="Resource_1w6v2"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.004"
+
+[sub_resource type="Resource" id="Resource_ueoa1"]
+script = ExtResource("15_wsu2k")
+boneName = "Bone.002"
+
+[sub_resource type="Animation" id="Animation_h1bgf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-6.0871067, 8.994877, 0.33122706)]
+}
+
+[sub_resource type="Animation" id="Animation_k12tt"]
+resource_name = "Sway"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.03, 3.03, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.74668694, 8.994877, 0.33122706), Vector3(-0.747, 8.995, 2.487), Vector3(-0.747, 8.995, -2.384), Vector3(-0.747, 8.995, 0.331)]
+}
+
+[sub_resource type="Animation" id="Animation_wsu2k"]
+resource_name = "hit"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3802"]
+_data = {
+&"RESET": SubResource("Animation_h1bgf"),
+&"Sway": SubResource("Animation_k12tt"),
+&"hit": SubResource("Animation_wsu2k")
+}
 
 [node name="Main" type="Node3D"]
 
@@ -223,3 +320,31 @@ offset_right = 4.0
 offset_bottom = 27.0
 max_value = 60.0
 value = 60.0
+
+[node name="tentical2" parent="." instance=ExtResource("14_jkdf5")]
+transform = Transform3D(0.76000917, 0, -0.6499123, 0, 1, 0, 0.6499123, 0, 0.76000917, -10.044379, -74.05366, -15.060978)
+script = ExtResource("15_k12tt")
+
+[node name="Skeleton3D" parent="tentical2/Armature" index="0"]
+transform = Transform3D(0.4990017, 0, -0.86660135, 0, 1, 0, 0.86660135, 0, 0.4990017, 0, 0, 0)
+
+[node name="OSIK" parent="tentical2/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.52023494, 0, -0.8540242, 0, 1, 0, 0.8540242, 0, 0.52023494, 0, 0, 0)
+targetBone = "Bone.015"
+IKLength = 13
+slerpSpeed = 1.0
+Limits = Array[ExtResource("15_wsu2k")]([SubResource("Resource_k12tt"), SubResource("Resource_h1bgf"), SubResource("Resource_b3802"), SubResource("Resource_fevyy"), SubResource("Resource_hibaj"), SubResource("Resource_pdsj5"), SubResource("Resource_ee4r6"), SubResource("Resource_gt3je"), SubResource("Resource_3pmx8"), SubResource("Resource_u50mg"), SubResource("Resource_cbgmd"), SubResource("Resource_1w6v2"), SubResource("Resource_ueoa1")])
+
+[node name="target" parent="tentical2/Armature" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7367334, 29.113907, -0.041269302)
+
+[node name="pole" parent="tentical2/Armature" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0871067, 8.994877, 0.33122706)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="tentical2/Armature/pole" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_b3802")
+}
+movie_quit_on_finish = true
+
+[editable path="tentical2"]

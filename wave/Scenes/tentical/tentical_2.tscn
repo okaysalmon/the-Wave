@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt1340cijt1gd"]
+
+[ext_resource type="PackedScene" uid="uid://c1cbiwdccvdsr" path="res://Scenes/tentical/tentical.blend" id="1_ny0bx"]
+[ext_resource type="Script" uid="uid://g3m32814700a" path="res://addons/OSIK/OS_IK.gd" id="2_w7ep5"]
+
+[node name="tentical2" instance=ExtResource("1_ny0bx")]
+
+[node name="OSIK" type="SkeletonModifier3D" parent="Armature/Skeleton3D" index="1" node_paths=PackedStringArray("targetNode", "poleNode")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("2_w7ep5")
+targetNode = NodePath("../../target")
+poleNode = NodePath("../../pole")
+metadata/_custom_type_script = "uid://g3m32814700a"
+
+[node name="target" type="Marker3D" parent="Armature" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 33.396313, 0)
+
+[node name="pole" type="Marker3D" parent="Armature" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.676273, 0)
