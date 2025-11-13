@@ -17,6 +17,7 @@ var channeling:bool = false:
 			GoingUp = false
 			moveingToPlacement = false
 			highlight = false
+			turn_on_outline(false)
 
 var GoingUp:bool = false:
 	set(newValue):
@@ -39,11 +40,11 @@ var highlight:bool = false:
 	set(newVal):
 		highlight = newVal
 		if placementHandlerNode.PlacementItem ==null or placementHandlerNode == null:
-			$MeshInstance3D/MeshInstance3D.visible = highlight
+			turn_on_selection_highlight(newVal)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	await get_tree().create_timer(10).timeout
+	#await get_tree().create_timer(10).timeout
 	currentImmune = false
 	pass # Replace with function body.
 
@@ -54,6 +55,8 @@ func _process(delta: float) -> void:
 		#print("I did something")
 		placementHandlerNode.SelectedPlacementItem = self
 		placementHandlerNode.PlacementItemScene = placementScene
+		turn_on_outline()
+		#movingToPos = placementHandlerNode.global_position
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -102,3 +105,10 @@ func moveToPlacement(placementsGlobalPosition:Vector3,delta):
 	#	movingToPos = placementsGlobalPosition
 	#	apply_central_force((moveDir*moveUpForce)+(Vector3(0,gravity*gravity_scale*mass,0)))
 		
+func turn_on_selection_highlight(True:bool = true)->void:
+	$MeshInstance3D/MeshInstance3D.visible = True
+	$MeshInstance3D/outLine.visible = false
+	
+func turn_on_outline(True:bool = true)->void:
+	$MeshInstance3D/MeshInstance3D.visible = false
+	$MeshInstance3D/outLine.visible = True

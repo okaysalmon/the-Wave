@@ -45,11 +45,11 @@ var RegenRate: float =10
 var CastRate: float  = 2
 var currentChangeTime:float = 10
 
-var water_current:Vector2 = Vector2(10,10)#Vector2(randf_range(-5.0,5.0),randf_range(-5.0,5.0))
+var water_current:Vector2 = Vector2(-10,-5)#Vector2(randf_range(-5.0,5.0),randf_range(-5.0,5.0))
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_random_Current_rep()
+	#_random_Current_rep()
 	pass # Replace with function body.
 
 func _random_Current():

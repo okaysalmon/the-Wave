@@ -39,6 +39,8 @@ const _MAX_IMPACTS: int = 5
 ## Defines if the coordinates of the origin is relative to the object position
 @export var relative_impact_position: bool = false
 
+@onready var player:Node3D = get_tree().get_first_node_in_group("Player")
+
 # The current impact index, used to keep track of the impacts and overwrite the
 # oldest impact if the maximum number of impacts is reached.
 var _current_impact: int = 0
@@ -124,6 +126,15 @@ func _ready() -> void:
 		$Area3D.body_shape_entered.connect(_on_area_3d_body_shape_entered)
 
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("cast_sheild"):
+		var point_on_sheild = (player.global_position-global_position).normalized() * 7.5
+		generate_from(point_on_sheild)
+		
+	elif event.is_action_released("cast_sheild"):
+		var point_on_sheild = (player.global_position-global_position).normalized() * 7.5
+		collapse_from(point_on_sheild)
 # Update the shader parameter [param name] with the [param value] and make sure
 # to update the front and back shader if split is enabled.
 func update_material(name: String, value: Variant) -> void:
@@ -135,8 +146,6 @@ func update_material(name: String, value: Variant) -> void:
 ## Generate the shield from the default origin, starting the generation
 ## animation.
 func generate() -> void:
-	if _generating_or_collapsing or !_collapsed:
-		return
 	generate_from(shield_origin)
 	update_material("_relative_origin_generate", true)
 
@@ -144,8 +153,6 @@ func generate() -> void:
 ## Generate the shield from a specific position, starting the generation
 ## animation with [param pos] as the origin in world space.
 func generate_from(pos: Vector3) -> void:
-	if _generating_or_collapsing or !_collapsed:
-		return
 	_generating_or_collapsing = true
 	_generate_time = 0.0
 	update_material("_relative_origin_generate", false)
@@ -157,8 +164,6 @@ func generate_from(pos: Vector3) -> void:
 ## Collapse the shield from the default origin, starting the collapse
 ## animation.
 func collapse() -> void:
-	if _generating_or_collapsing or _collapsed:
-		return
 	collapse_from(shield_origin)
 	update_material("_relative_origin_generate", true)
 
@@ -166,8 +171,6 @@ func collapse() -> void:
 ## Collapse the shield from a specific position, starting the collapse
 ## animation with [param pos] as the origin in world space.
 func collapse_from(pos: Vector3) -> void:
-	if _generating_or_collapsing or _collapsed:
-		return
 	_generating_or_collapsing = true
 	_generate_time = 0.0
 	update_material("_relative_origin_generate", false)
@@ -282,3 +285,14 @@ func _load_web_shader() -> void:
 		var web_shader = load(web_shader_path)
 		material.shader = web_shader
 		print("Loaded web-optimized shader")
+
+
+func _crate_entered_area(body:Node3D):
+	print("Im called Bro")
+	if body.is_in_group("sheildAffects"):
+		impact(body.global_position)
+
+func _crate_exit_area(body:Node3D):
+	print("Im called Bro")
+	if body.is_in_group("sheildAffects"):
+		impact(body.global_position)

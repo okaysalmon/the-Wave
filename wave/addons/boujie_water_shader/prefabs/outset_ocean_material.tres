@@ -8,7 +8,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_h8y5l")
-shader_parameter/wave_time = 1215.9580382211536
+shader_parameter/wave_time = 1086.0142253334784
 shader_parameter/freeze_time = false
 shader_parameter/albedo = Color(0, 0.431373, 1, 0.321569)
 shader_parameter/albedo_fresnel = Color(0, 0, 0, 1)

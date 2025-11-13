@@ -552,7 +552,7 @@ void fragment() {
 		world_pos,
 		origin_generate_world,
 		_thickness_generate,
-		_object_scale * _object_size,
+		_object_scale,  //was :_object_scale * _object_size, |have changed this
 		_time_generate
 		//mod(TIME, 1.0 / _object_scale * _object_size) //see the effect looping
 	);

@@ -65,8 +65,10 @@ func _process(delta: float) -> void:
 		else:
 			if cam.mousedOverCollisionPoint != Vector3.ZERO and cam.mousedOverNormals.y >=0.0:
 				self.position = cam.mousedOverCollisionPoint+(cam.mousedOverNormals * PlacementItem.placement_offset)
+				SelectedPlacementItem.movingToPos = global_position
 		if Input.is_action_just_pressed("select_item") and !SelectCoolDown:
 			Channeling = true
+			
 	pass
 
 func _connectToPlacemntHolder():

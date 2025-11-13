@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b2lf28ap3u3o0"]
+[gd_scene load_steps=25 format=3 uid="uid://b2lf28ap3u3o0"]
 
 [ext_resource type="Shader" uid="uid://c70rs3a7nbva2" path="res://SkyShader/SkyShader.tres" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://b1ifm0554gtdb" path="res://addons/boujie_water_shader/prefabs/outset_ocean.tscn" id="2_8gbba"]
@@ -8,7 +8,10 @@
 [ext_resource type="Script" uid="uid://bidyklu47r0k2" path="res://Scenes/Cube.gd" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://d4j8c2bite2cd" path="res://RBCharacter/RB_Char.tscn" id="6_21xkr"]
 [ext_resource type="PackedScene" uid="uid://lctcsca8amjt" path="res://FloatItems/crate.tscn" id="7_6bp64"]
+[ext_resource type="PackedScene" uid="uid://lx0l2fbyrhd5" path="res://Scenes/protective_shield_sphere.tscn" id="7_fdnlq"]
+[ext_resource type="Shader" uid="uid://dcko35tc4k343" path="res://addons/nojoule-energy-shield/shield.gdshader" id="8_jkdf5"]
 [ext_resource type="Script" uid="uid://b6jg87yr2f1h8" path="res://Scenes/placement_handler.gd" id="9_hptm8"]
+[ext_resource type="Texture2D" uid="uid://dnqegf8mxqli" path="res://addons/nojoule-energy-shield/shield_noise.tres" id="9_wsu2k"]
 [ext_resource type="Script" uid="uid://caq2h6lmf1k54" path="res://Scenes/player_stats.gd" id="10_hptm8"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
@@ -33,6 +36,75 @@ background_mode = 2
 sky = SubResource("Sky_6bp64")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_344ge"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3q470"]
+render_priority = 1
+shader = ExtResource("8_jkdf5")
+shader_parameter/_quantization = true
+shader_parameter/_steps_quantization = 5
+shader_parameter/_object_scale = 15.0
+shader_parameter/_object_size = 15.0
+shader_parameter/_only_on_wave_visibility = false
+shader_parameter/_start_falloff_visibility = 0.5
+shader_parameter/_end_falloff_visibility = 0.3
+shader_parameter/_time_multiplier_activation = 1.0
+shader_parameter/_distance_multiplier_activation = 1.0
+shader_parameter/_width_time_activation = 1.0
+shader_parameter/_enable_highlight_intersection = true
+shader_parameter/_width_highlight_intersection = 1.0
+shader_parameter/_noise_texture = ExtResource("9_wsu2k")
+shader_parameter/_speed_noise = Vector2(0.02, 0.02)
+shader_parameter/_origin_generate = Vector3(0, 0.5, 0)
+shader_parameter/_relative_origin_generate = true
+shader_parameter/_time_generate = 1.0
+shader_parameter/_thickness_generate = 0.25
+shader_parameter/_collapse = false
+shader_parameter/_color_shield = Color(0.26, 0.975, 1, 1)
+shader_parameter/_color_brightness_shield = 15.0
+shader_parameter/_intensity_shield = 3.0
+shader_parameter/glow_enabled = true
+shader_parameter/glow_strength = 0.1
+shader_parameter/_active_static = true
+shader_parameter/_origin_static = Vector3(0, 0.5, 0)
+shader_parameter/_speed_static = 0.1
+shader_parameter/_frequency_static = 80.0
+shader_parameter/_amplitude_static = 0.002
+shader_parameter/_normal_amplitude_static = 0.002
+shader_parameter/_effect_radius_static = 1.2
+shader_parameter/_active_static_offset_hl = true
+shader_parameter/_strength_static_offset_hl = 1.0
+shader_parameter/_intensity_static_offset_hl = 5.0
+shader_parameter/_relative_origin_static = true
+shader_parameter/_origin_impact = PackedVector3Array(0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/_time_impact = PackedFloat32Array(0, 0, 0, 0, 0)
+shader_parameter/_frequency_impact = 20.0
+shader_parameter/_waves_impact = 0.0
+shader_parameter/_fade_waves_impact = 2.0
+shader_parameter/_amplitude_impact = 0.1
+shader_parameter/_normal_amplitude_impact = 0.05
+shader_parameter/_radius_impact = 1.0
+shader_parameter/_active_impact_offset_hl = true
+shader_parameter/_strength_impact_offset_hl = 1.0
+shader_parameter/_intensity_impact_offset_hl = 5.0
+shader_parameter/_relative_origin_impact = false
+shader_parameter/_active_border = false
+shader_parameter/_intensity_border = 2.0
+shader_parameter/_percentage_border = 0.1
+shader_parameter/_show_normals = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_k12tt"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_3q470")
+radius = 7.5
+height = 15.0
+radial_segments = 256
+rings = 256
+
+[sub_resource type="Curve" id="Curve_h1bgf"]
+resource_local_to_scene = true
+resource_name = "animation_curve"
+_data = [Vector2(0, 0), 0.0, 2.60088, 0, 0, Vector2(0.996183, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_21xkr"]
 size = Vector3(10, 1, 10)
@@ -65,6 +137,10 @@ physics_material_override = SubResource("PhysicsMaterial_344ge")
 script = ExtResource("5_kry3j")
 float_offset = 1.5
 floatiesnode = NodePath("floats")
+
+[node name="ShieldSphere" parent="RigidBody3D" instance=ExtResource("7_fdnlq")]
+mesh = SubResource("SphereMesh_k12tt")
+animation_curve = SubResource("Curve_h1bgf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("BoxMesh_21xkr")
@@ -101,7 +177,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.4910793)
 [node name="float9" type="Marker3D" parent="RigidBody3D/floats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.471534, 0, 4.4910793)
 
-[node name="RigidBody3D2" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("6_21xkr")]
+[node name="RigidBody3D2" parent="." node_paths=PackedStringArray("camera") groups=["Player"] instance=ExtResource("6_21xkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21644783, 2.1217723, 0.15811825)
 camera = NodePath("../Camera3D")
 
