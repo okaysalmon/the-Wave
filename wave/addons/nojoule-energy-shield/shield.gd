@@ -40,6 +40,9 @@ const _MAX_IMPACTS: int = 5
 @export var relative_impact_position: bool = false
 
 @onready var player:Node3D = get_tree().get_first_node_in_group("Player")
+@onready var player_stats: Node = $"../../PlayerStats"
+
+var ChanelCost :float = 2.0
 
 # The current impact index, used to keep track of the impacts and overwrite the
 # oldest impact if the maximum number of impacts is reached.
@@ -70,6 +73,7 @@ var _generating_or_collapsing: bool = false
 ## expected to be the specific energy shield shader.
 @onready var material: ShaderMaterial
 
+var shieldUp = false
 
 func _ready() -> void:
 	# Initialize the arrays with the default values
@@ -115,6 +119,8 @@ func _ready() -> void:
 			material.next_pass.shader = front_shader
 
 	update_material("object_scale", global_transform.basis.get_scale().x)
+	
+	collapse_from(Vector3.ZERO)
 
 	# Connect the input event to the shield
 	if handle_input_events and $Area3D:
@@ -125,16 +131,26 @@ func _ready() -> void:
 		$Area3D.area_entered.connect(_on_area_3d_body_entered)
 		$Area3D.body_shape_entered.connect(_on_area_3d_body_shape_entered)
 
-
+func _process(delta: float) -> void:
+	if shieldUp:
+		player_stats.currentMana -= ChanelCost *delta
+		if !player_stats._EnoughManaToCast(ChanelCost):
+			var point_on_sheild = (player.global_position-global_position).normalized() * 7.5
+			collapse_from(point_on_sheild)
+			shieldUp = false
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("cast_sheild"):
+	if event.is_action_pressed("cast_sheild") and player_stats._EnoughManaToCast(ChanelCost):
 		var point_on_sheild = (player.global_position-global_position).normalized() * 7.5
 		generate_from(point_on_sheild)
+		shieldUp = true
+		player_stats.casting = true
 		
-	elif event.is_action_released("cast_sheild"):
+	elif event.is_action_released("cast_sheild") and shieldUp:
 		var point_on_sheild = (player.global_position-global_position).normalized() * 7.5
 		collapse_from(point_on_sheild)
+		shieldUp = false
+		player_stats.casting = false
 # Update the shader parameter [param name] with the [param value] and make sure
 # to update the front and back shader if split is enabled.
 func update_material(name: String, value: Variant) -> void:
@@ -288,11 +304,16 @@ func _load_web_shader() -> void:
 
 
 func _crate_entered_area(body:Node3D):
-	print("Im called Bro")
-	if body.is_in_group("sheildAffects"):
-		impact(body.global_position)
+	#print("Im called Bro")
+	if shieldUp:
+		if body.is_in_group("sheildAffects"):
+			impact(body.global_position)
+		if body.is_in_group("CrackenTent"):
+			var MainNode = body.get_parent().get_parent().get_parent().get_parent()
+			if MainNode.state == MainNode.STATES.Attacking:
+				MainNode.state = MainNode.STATES.Hurt
 
 func _crate_exit_area(body:Node3D):
-	print("Im called Bro")
+	#print("Im called Bro")
 	if body.is_in_group("sheildAffects"):
 		impact(body.global_position)

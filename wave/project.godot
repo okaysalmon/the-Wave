@@ -22,6 +22,8 @@ enabled=PackedStringArray("res://addons/OSIK/plugin.cfg", "res://addons/boujie_w
 [global_group]
 
 sheildAffects=""
+CrackenTent=""
+CrackenTarget=""
 
 [input]
 

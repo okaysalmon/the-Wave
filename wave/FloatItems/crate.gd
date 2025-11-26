@@ -8,6 +8,8 @@ extends FloatingRigidBody3d
 @onready var placementHandlerNode = get_tree().get_first_node_in_group("PlacementHandler")
 @onready var playerStats:Node = get_tree().get_first_node_in_group("PlayStats")
 
+var maxSubmergedTime = 25
+
 var channeling:bool = false:
 	set(newValue):
 		channeling = newValue
@@ -44,7 +46,7 @@ var highlight:bool = false:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#await get_tree().create_timer(10).timeout
+	await get_tree().create_timer(3).timeout
 	currentImmune = false
 	pass # Replace with function body.
 
@@ -57,6 +59,15 @@ func _process(delta: float) -> void:
 		placementHandlerNode.PlacementItemScene = placementScene
 		turn_on_outline()
 		#movingToPos = placementHandlerNode.global_position
+	if submerged:
+		if maxSubmergedTime > 0:
+			maxSubmergedTime -= delta
+		else:
+			float_force -= delta/10
+			if global_position.y < -50:
+				print("Was lost to the deaps")
+				queue_free()
+	
 	pass
 
 func _physics_process(delta: float) -> void:

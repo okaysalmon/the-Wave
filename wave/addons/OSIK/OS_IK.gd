@@ -5,6 +5,8 @@ class_name OSIK
 
 ##Code Version 1.0.5.8##
 
+enum AXIS {X,Y,Z}
+
 ##[b][u]Will only make a diffrence if[/u][/b] the IK Target bone is the last in the [Skeleton3D]
 @export var tipBoneLenght:float = 0.1:
 	set(newVal):
@@ -144,7 +146,7 @@ func update_bone_sizes():
 		for i in IK_Look_Spots.size():
 			var bone_idx: int = skeleton.find_bone(boneList[i])
 			IK_Look_Spots[i][1] = get_bone_length(skeleton,bone_idx)
-		_creat_bone_current_pose_list()
+		#_creat_bone_current_pose_list()
 
 func get_bone_length(skeleton_node: Skeleton3D, bone_index: int) -> float:
 	# Get the global pose of the current bone
@@ -246,7 +248,7 @@ func _process_modification_with_delta(delta: float) -> void:
 		var shouldTry:bool = true
 		if DontTryIfCloseEnough:
 			if IK_Look_Spots[0][1] + targetNode.global_position.distance_to(IK_Look_Spots[0][0].origin) < CloseEnoughValue:
-				print(IK_Look_Spots[0][1] + targetNode.global_position.distance_to(IK_Look_Spots[0][0].origin))
+				#print(IK_Look_Spots[0][1] + targetNode.global_position.distance_to(IK_Look_Spots[0][0].origin))
 				shouldTry = false
 		if is_inside_tree() and targetNode !=null and is_instance_valid(targetNode) and targetBone!=null and targetBone !="" and shouldTry:
 			var currentIteration:int = 0
@@ -295,7 +297,8 @@ func _process_modification_with_delta(delta: float) -> void:
 								ParrentAngleForward = (IK_Look_Spots[inversI+1][0].origin - IK_Look_Spots[inversI][0].origin).normalized()
 							else:
 								var bone_idx: int = skeleton.find_bone(boneList[inversI])
-								ParrentAngleForward = ((skeleton.global_transform * skeleton.get_bone_global_pose(bone_idx-1)).origin -IK_Look_Spots[inversI][0].origin).normalized()
+								if bone_idx!=0:
+									ParrentAngleForward = ((skeleton.global_transform * skeleton.get_bone_global_pose(bone_idx-1)).origin -IK_Look_Spots[inversI][0].origin).normalized()
 								
 							IK_DirectionForward = clamp_directional_angle(ParrentAngleForward,IK_DirectionForward,Limits[inversI])
 							IK_Look_Spots[inversI-1][0].origin = IK_Look_Spots[inversI][0].origin - IK_DirectionForward*IK_Look_Spots[inversI][1]
@@ -319,7 +322,6 @@ func _process_modification_with_delta(delta: float) -> void:
 							
 			##The code below uses the position pointers created above to align each bone to the correct position along the IK chain.
 			## it also will slerp the basis towards the end goal
-			#$"../MeshInstance3D2".global_position = IK_Look_Spots[1][0].origin
 			for bone in boneList.size():
 				var bone_idx: int = skeleton.find_bone(boneList[boneList.size()-bone-1])
 				var pose: Transform3D = skeleton.global_transform * skeleton.get_bone_global_pose(bone_idx)
@@ -349,7 +351,12 @@ func _process_modification_with_delta(delta: float) -> void:
 					boneCurrentPoseArray[boneList.size()-bone-1].basis = boneCurrentPoseArray[boneList.size()-bone-1].basis.orthonormalized().slerp(local_pose.basis.orthonormalized(),slerpSpeed*1*delta).orthonormalized()
 				else:
 					boneCurrentPoseArray[boneList.size()-bone-1].basis = local_pose.basis.orthonormalized()
-				if bone != boneList.size()-1:
+				#Htis is where the roll lock will be applied once i have the code corected to fix y flip corection
+				if bone_idx!=0:
+					#print(str(skeleton.get_bone_pose(bone_idx-1).basis) +" the index is " +str(boneCurrentPoseArray[boneList.size()-bone-1].basis))
+					boneCurrentPoseArray[boneList.size()-bone-1].basis =  limit_relative_y_roll(skeleton.get_bone_pose(bone_idx-1).basis,boneCurrentPoseArray[boneList.size()-bone-1].basis,Limits[bone-1].maxRollDeg)     #     clamp_roll(skeleton.get_bone_pose(bone_idx-1).basis,boneCurrentPoseArray[boneList.size()-bone-1].basis,Limits[bone-1].maxRollDeg)
+				
+				if bone != boneList.size()-1 :
 					# Sets the new origin for the next bone based on the current bone’s basis Y direction.
 					boneCurrentPoseArray[boneList.size()-bone-2].origin = (boneCurrentPoseArray[boneList.size()-bone-1].origin+ (boneCurrentPoseArray[boneList.size()-bone-1].basis.orthonormalized().y.normalized() *(IK_Look_Spots[boneList.size()-bone-1][1]))/global_scale)
 				skeleton.set_bone_global_pose(bone_idx, boneCurrentPoseArray[boneList.size()-bone-1])
@@ -360,11 +367,7 @@ func _process_modification_with_delta(delta: float) -> void:
 					else:
 						skeleton.set_bone_global_pose(skeleton.find_bone(targetBone)+1,Transform3D(targetNode.basis,skeleton.get_bone_global_pose(skeleton.find_bone(targetBone)+1).origin))
 			## Bake poses from last OSIK, use this for OSIK's to load there pose's from to stop jitters
-			if globalRot != skeleton.global_basis:
-				print("Shit was diffrent")
-				globalRot = skeleton.global_basis
-			else:
-				bake_bone_pose()
+			bake_bone_pose()
 			#if !allOSIK.is_empty():
 			#	if allOSIK[-1] == self:
 					
@@ -392,14 +395,27 @@ func _y_look_at_rel_to_globalTransform(from: Transform3D, target: Vector3, globa
 	var t_v: Vector3 = target - from.origin
 	var v_y: Vector3 = t_v.normalized()
 	
+	# making the out come for an ajusted that sutable for x alignment
+	#var Test_Rest_Y= globalTransform.basis.y.normalized()
+	#var rot_to_Aling = Test_Rest_Y.signed_angle_to(v_y,globalTransform.basis.z.normalized())
+	#var X_adjust_globalTransform = globalTransform.basis.rotated(globalTransform.basis.z.normalized(),rot_to_Aling)
+	
+	# making the out come for an ajusted that sutable for z alignment
+	#var ZTest_Rest_Y= globalTransform.basis.y.normalized()
+	#var Zrot_to_Aling = Test_Rest_Y.signed_angle_to(v_y,globalTransform.basis.x.normalized())
+	#var Z_adjust_globalTransform = globalTransform.basis.rotated(globalTransform.basis.x.normalized(),rot_to_Aling)
+	
+	#blend Based off if its closer to z or x
+	#globalTransform = X_adjust_globalTransform.slerp(Z_adjust_globalTransform,abs((globalTransform.inverse()* v_y).z*(1-(globalTransform.inverse()* v_y).x)))
+	#$"../../../Label3D".text = str(abs(v_y.z))
+	
 	##Creating a fixed Roll relative to the rest pose's roll
 	var rest_z = globalTransform.basis.x.normalized()
 	var v_z: Vector3 = rest_z.cross(v_y).normalized()
 	var v_x: Vector3 = v_y.cross(v_z).normalized()
-	
 	from.basis = Basis(v_x, v_y, v_z)
-	
 	return from
+
 
 
 func clamp_directional_angle(reference: Vector3, target: Vector3, OSLimits: OSIK_Constraints) -> Vector3:
@@ -514,3 +530,73 @@ func return_true_if_update_required()->bool:
 func set_all_OSIK_for_update_required():
 	for node in allOSIK:
 		node.updateChainRequired = true
+
+
+func _detect_Axis_dif(basis1:Basis, basis2:Basis, AxisXYZ:AXIS = 1)->float:
+	# Get Euler angles
+	var euler1 = basis1.get_euler()
+	var euler2 = basis2.get_euler()
+
+	# Get the difference for the roll (z-axis)
+	#print()
+	var roll_diff = euler2.y - euler1.y
+	if AxisXYZ == 0:
+		roll_diff = euler2.x - euler1.x
+	elif AxisXYZ == 2:
+		roll_diff = euler2.z - euler1.z
+	# Normalize the angle to be within the range of -180 to +180 degrees
+	if roll_diff > PI:
+		roll_diff -= 2 * PI
+	elif roll_diff < -PI:
+		roll_diff += 2 * PI
+
+	# Convert to degrees to make it easier to use and understand
+	var roll_difference_deg = rad_to_deg(roll_diff)
+	#if roll_difference_deg!=0.0:
+		#print(roll_difference_deg)
+	return roll_difference_deg
+	
+
+## This is the function I am using to clamp the roll. I could not get it to work using only Euler angles and Basis, so I dipped into quaternions, that fourth-dimensional mind flayer. There are still some edge cases where it inverts and twists the wrong way, but with Godot 4.6 adding full IK this may not need further updates and should be suitable for about 90% of cases.
+func limit_relative_y_roll(basis1: Basis, basis2: Basis, limit_radians: float) -> Basis:
+	var axis := Vector3.UP.normalized()  # Y axis
+
+	# Find relative rotation of B from A
+	var relative_basis: Basis = basis1.inverse() * basis2
+	var rel :Quaternion= Quaternion(relative_basis.orthonormalized())
+
+	#Get signed twist angle around Y
+	var v :Vector3= Vector3(rel.x, rel.y, rel.z)
+	var axis_dot_v :float= axis.dot(v)
+	var w :float= rel.w
+
+	var angle := 0.0
+	var sin_half_abs:float= abs(axis_dot_v)
+
+	if sin_half_abs > 0 or abs(w) > 0:
+		# get Unsigned angle from quaternion
+		angle = 2.0 * atan2(sin_half_abs, w)
+		# Give it a sign based on direction along axis
+		if axis_dot_v < 0.0:
+			angle = -angle
+	# If already within limits, return original b
+	if abs(angle) <= limit_radians:
+		return basis2
+
+	# Original twist around Y
+	var twist_orig :Quaternion= Quaternion(axis, angle)
+	# Limited twist around Y
+	var clamped_angle :float= clamp(angle, -limit_radians, limit_radians)
+	var twist_limited :Quaternion= Quaternion(axis, clamped_angle)
+
+	# swing * twist = rel  =>  swing = rel * twist^-1
+	var swing :Quaternion= rel * twist_orig.inverse()
+
+	# New relative rotation with limited twist
+	var rel_limited :Quaternion= swing * twist_limited
+
+	# Convert back to Basis and to world space
+	var new_rel_basis :Basis= Basis(rel_limited)
+	var new_basis_b :Basis= basis1 * new_rel_basis
+
+	return new_basis_b

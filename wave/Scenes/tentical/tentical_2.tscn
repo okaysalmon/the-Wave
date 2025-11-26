@@ -1,9 +1,281 @@
-[gd_scene load_steps=3 format=3 uid="uid://dt1340cijt1gd"]
+[gd_scene load_steps=46 format=3 uid="uid://dt1340cijt1gd"]
 
 [ext_resource type="PackedScene" uid="uid://c1cbiwdccvdsr" path="res://Scenes/tentical/tentical.blend" id="1_ny0bx"]
+[ext_resource type="Script" uid="uid://8eimvlejjjsh" path="res://Scenes/tentical/tentical_2.gd" id="2_h6fpu"]
 [ext_resource type="Script" uid="uid://g3m32814700a" path="res://addons/OSIK/OS_IK.gd" id="2_w7ep5"]
+[ext_resource type="Script" uid="uid://dj2fma4aphiml" path="res://addons/OSIK/constraints.gd" id="3_27occ"]
+[ext_resource type="Script" uid="uid://bcldvqia7j2so" path="res://Scenes/tentical/smash_space.gd" id="5_cquby"]
+
+[sub_resource type="Resource" id="Resource_h6fpu"]
+script = ExtResource("3_27occ")
+boneName = "Bone.016"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_cquby"]
+script = ExtResource("3_27occ")
+boneName = "Bone.015"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_ov2sm"]
+script = ExtResource("3_27occ")
+boneName = "Bone.014"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_dijtl"]
+script = ExtResource("3_27occ")
+boneName = "Bone.013"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_er003"]
+script = ExtResource("3_27occ")
+boneName = "Bone.012"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_aeek0"]
+script = ExtResource("3_27occ")
+boneName = "Bone.011"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_dkjrp"]
+script = ExtResource("3_27occ")
+boneName = "Bone.010"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_hkm3l"]
+script = ExtResource("3_27occ")
+boneName = "Bone.009"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_m1cgw"]
+script = ExtResource("3_27occ")
+boneName = "Bone.008"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_i8rdv"]
+script = ExtResource("3_27occ")
+boneName = "Bone.007"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_dtdw4"]
+script = ExtResource("3_27occ")
+boneName = "Bone.006"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_3qke1"]
+script = ExtResource("3_27occ")
+boneName = "Bone.005"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_tdr2s"]
+script = ExtResource("3_27occ")
+boneName = "Bone.004"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_27occ"]
+script = ExtResource("3_27occ")
+boneName = "Bone.002"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_kuwml"]
+script = ExtResource("3_27occ")
+boneName = "Bone.001"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_ban2i"]
+script = ExtResource("3_27occ")
+boneName = "Bone"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_27occ"]
+radius = 1.3554688
+height = 4.8067627
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h6fpu"]
+radius = 1.3554688
+height = 4.4501953
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cquby"]
+radius = 1.3554688
+height = 4.1445313
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ov2sm"]
+radius = 0.9716797
+height = 3.6708984
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3qke1"]
+radius = 1.9177246
+height = 5.344803
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dijtl"]
+radius = 1.1318359
+height = 3.4384766
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_er003"]
+radius = 1.0673828
+height = 3.118164
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aeek0"]
+radius = 0.97216797
+height = 2.7324219
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tdr2s"]
+radius = 1.9177246
+height = 4.3339844
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dkjrp"]
+radius = 0.8276367
+height = 2.421875
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kuwml"]
+radius = 1.9177246
+height = 4.288086
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hkm3l"]
+radius = 0.79345703
+height = 2.6212158
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ban2i"]
+radius = 1.9177246
+height = 4.260742
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m1cgw"]
+radius = 0.6401367
+height = 1.9433594
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_477q1"]
+radius = 1.550293
+height = 3.8857422
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i8rdv"]
+radius = 0.45117188
+height = 2.0717773
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ghg4w"]
+radius = 1.2788086
+height = 3.180664
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dtdw4"]
+radius = 0.34472656
+height = 0.97753906
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uh5rt"]
+radius = 0.7597656
+height = 2.1845703
+
+[sub_resource type="Animation" id="Animation_h1bgf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-6.0871067, 8.994877, 0.33122706)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../target:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-17.867868, 17.543377, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k12tt"]
+resource_name = "Sway"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.03, 3.03, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.74668694, 8.994877, 0.33122706), Vector3(-0.747, 8.995, 2.487), Vector3(-0.747, 8.995, -2.384), Vector3(-0.747, 8.995, 0.331)]
+}
+
+[sub_resource type="Animation" id="Animation_wsu2k"]
+resource_name = "hit"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../target:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.96666664, 1.5, 3),
+"transitions": PackedFloat32Array(1, 3.1383367, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 30.396313, 0), Vector3(-19.87883, 13.414341, 0), Vector3(0.65797234, 28.955853, 0), Vector3(45.83187, -2.7730083, 0), Vector3(0, 30.396313, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"turn_off_attack"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cquby"]
+resource_name = "Pain"
+length = 6.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.36666667, 0.6333333, 0.96666664, 1.3666667, 1.7666667, 2.0666666, 2.3066666, 2.5333333, 2.96, 3.3, 3.6399999, 3.8966665, 4.1666665, 4.4333334, 4.6666665, 4.9766665, 5.3266664, 5.56, 5.7999997, 6.0333333, 6.433334, 6.733333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.74699974, 8.995, -0.44227946), Vector3(-1.3419122, 8.995, -0.44227946), Vector3(1.6733676, 8.995, -1.941441), Vector3(-0.057584293, 8.995, 1.8687737), Vector3(1.6439408, 8.995, -2.0491853), Vector3(3.4257457, 8.995, -0.12435366), Vector3(-0.55134565, 8.995, 1.5480251), Vector3(-0.5513458, 8.995, -2.7049031), Vector3(1.575434, 8.995, 3.3990004), Vector3(2.7077887, 8.995, -1.7512631), Vector3(1.306908, 8.995, 0.49256164), Vector3(-0.3583466, 8.995, -1.6307926), Vector3(4.6397223, 8.995, 0.29897907), Vector3(-1.3419122, 8.995, -0.44227946), Vector3(1.6733676, 8.995, -1.941441), Vector3(-0.057584293, 8.995, 1.8687737), Vector3(1.6439408, 8.995, -2.0491853), Vector3(3.4257457, 8.995, -0.12435366), Vector3(-0.55134565, 8.995, 1.5480251), Vector3(-0.5513458, 8.995, -2.7049031), Vector3(1.575434, 8.995, 3.3990004), Vector3(2.7077887, 8.995, -1.7512631), Vector3(1.306908, 8.995, 0.49256164), Vector3(-0.74699974, 8.995, -0.44227946)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../target:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.6666667, 0.8, 2.01, 6.4333334, 6.733333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(25.249994, 7.135556, 0), Vector3(25.249994, 7.135556, 0), Vector3(-5.8193727, 35.364784, 0), Vector3(-10.984187, 23.056818, 0), Vector3(0.06137187, 31.036234, 0), Vector3(0.06137187, 31.036234, 0), Vector3(15.19989, 17.448599, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3802"]
+_data = {
+&"Pain": SubResource("Animation_cquby"),
+&"RESET": SubResource("Animation_h1bgf"),
+&"Sway": SubResource("Animation_k12tt"),
+&"hit": SubResource("Animation_wsu2k")
+}
 
 [node name="tentical2" instance=ExtResource("1_ny0bx")]
+script = ExtResource("2_h6fpu")
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(-4.3711385e-08, 0, 0.9999999, 0, 0.9999999, 0, -0.99999994, 0, -4.3711385e-08, 0, 0, 0)
 
 [node name="OSIK" type="SkeletonModifier3D" parent="Armature/Skeleton3D" index="1" node_paths=PackedStringArray("targetNode", "poleNode")]
 _import_path = NodePath("")
@@ -15,7 +287,7 @@ process_thread_group = 0
 physics_interpolation_mode = 0
 auto_translate_mode = 0
 editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 34.125847, 23.642, -38.51558)
 rotation_edit_mode = 0
 rotation_order = 2
 top_level = false
@@ -26,10 +298,357 @@ influence = 1.0
 script = ExtResource("2_w7ep5")
 targetNode = NodePath("../../target")
 poleNode = NodePath("../../pole")
+LockToRestRoll = true
+targetBone = "Bone.016"
+IKLength = 16
+useSlerp = false
+Limits = Array[ExtResource("3_27occ")]([SubResource("Resource_h6fpu"), SubResource("Resource_cquby"), SubResource("Resource_ov2sm"), SubResource("Resource_dijtl"), SubResource("Resource_er003"), SubResource("Resource_aeek0"), SubResource("Resource_dkjrp"), SubResource("Resource_hkm3l"), SubResource("Resource_m1cgw"), SubResource("Resource_i8rdv"), SubResource("Resource_dtdw4"), SubResource("Resource_3qke1"), SubResource("Resource_tdr2s"), SubResource("Resource_27occ"), SubResource("Resource_kuwml"), SubResource("Resource_ban2i")])
 metadata/_custom_type_script = "uid://g3m32814700a"
 
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.9965811, -0.08262063, -4.656613e-10, 0.08252103, 0.9953798, 0.04908538, -0.004055464, -0.04891756, 0.9987946, 0, 0, 0)
+bone_name = "Bone"
+bone_idx = 0
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_27occ")
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D" index="1"]
+
+[node name="BoneAttachment3D2" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.996582, -0.08260956, 5.4655277e-07, 0.08250997, 0.995381, 0.049078792, -0.004054921, -0.048910998, 0.9987949, -0.08262063, 0.9953798, -0.048917558)
+bone_name = "Bone.001"
+bone_idx = 1
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D2" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D2/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_27occ")
+
+[node name="BoneAttachment3D3" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.9965833, -0.08257034, -0.0020230098, 0.08257034, 0.99538535, 0.04888779, -0.0020230066, -0.048887797, 0.9988021, -0.24783975, 2.9861417, -0.14673953)
+bone_name = "Bone.002"
+bone_idx = 2
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D3" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D3/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_27occ")
+
+[node name="BoneAttachment3D4" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.9965844, -0.082482, -0.0040441696, 0.082581095, 0.9953952, 0.048667707, 1.133699e-05, -0.048835453, 0.99880666, -0.41298044, 4.9769125, -0.24451514)
+bone_name = "Bone.004"
+bone_idx = 3
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D4" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D4/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_27occ")
+
+[node name="BoneAttachment3D5" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.9965997, -0.08229727, -0.0040351506, 0.082396135, 0.9954159, 0.04855873, 2.0402045e-05, -0.0487261, 0.99881214, -0.5779444, 6.967703, -0.34218603)
+bone_name = "Bone.005"
+bone_idx = 4
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D5" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D5/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_h6fpu")
+
+[node name="BoneAttachment3D6" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.9966371, -0.08191722, -0.0019910377, 0.081917204, 0.99545836, 0.048501085, -0.001991078, -0.04850108, 0.9988213, -0.7425389, 8.958534, -0.4396382)
+bone_name = "Bone.006"
+bone_idx = 5
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D6" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D6/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_cquby")
+
+[node name="BoneAttachment3D7" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.9967027, -0.081138186, 7.251068e-05, 0.081040345, 0.9955445, 0.04820467, -0.0039834264, -0.04803986, 0.9988376, -0.9063734, 10.949451, -0.5366403)
+bone_name = "Bone.007"
+bone_idx = 6
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D7" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D7/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_ov2sm")
+
+[node name="SmashSpace" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D7" index="1" groups=["SmashSpace"]]
+script = ExtResource("5_cquby")
+Active = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D7/SmashSpace" index="0"]
+transform = Transform3D(1, 3.7252903e-09, 2.7139322e-08, 1.0244548e-08, -4.5169145e-08, -0.99999964, 8.568168e-08, 1.0000001, 2.3283064e-09, 0.14401221, -0.21578789, 0.109801956)
+shape = SubResource("CapsuleShape3D_3qke1")
+
+[node name="BoneAttachment3D8" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="9"]
+transform = Transform3D(0.9968314, -0.079542786, 0.000148977, 0.079446875, 0.99571836, 0.0472568, -0.003907277, -0.04709524, 0.9988827, -1.0686498, 12.94054, -0.63272)
+bone_name = "Bone.008"
+bone_idx = 7
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D8" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D8/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_dijtl")
+
+[node name="SmashSpace" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D8" index="1" groups=["SmashSpace"]]
+script = ExtResource("5_cquby")
+Active = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D8/SmashSpace" index="0"]
+transform = Transform3D(0.99999994, -3.7252903e-09, 2.0649168e-08, 5.864422e-09, -4.5634806e-08, -0.9999996, 8.568168e-08, 1, 2.7939677e-09, 0.14335382, -0.23311329, 0.109411694)
+shape = SubResource("CapsuleShape3D_3qke1")
+
+[node name="BoneAttachment3D9" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="10"]
+transform = Transform3D(0.99708545, -0.07627594, -0.0017259342, 0.07627594, 0.99606353, 0.045160986, -0.001725557, -0.04516101, 0.99897814, -1.2277353, 14.931977, -0.7269105)
+bone_name = "Bone.009"
+bone_idx = 8
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D9" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D9/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_er003")
+
+[node name="SmashSpace" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D9" index="1" groups=["SmashSpace"]]
+script = ExtResource("5_cquby")
+Active = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D9/SmashSpace" index="0"]
+transform = Transform3D(1, 0, 2.2670065e-08, 5.691163e-09, -4.5867637e-08, -0.9999996, 9.126961e-08, 1, 3.0267984e-09, 0.14257336, -0.2508192, 0.13489014)
+shape = SubResource("CapsuleShape3D_3qke1")
+
+[node name="BoneAttachment3D10" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="11"]
+transform = Transform3D(0.99757016, -0.06958595, -0.003463875, 0.06966957, 0.9967247, 0.04105853, 0.0005954319, -0.041200083, 0.99915063, -1.3802872, 16.924103, -0.81723255)
+bone_name = "Bone.010"
+bone_idx = 9
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D10" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D10/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_aeek0")
+
+[node name="SmashSpace" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D10" index="1" groups=["SmashSpace"]]
+script = ExtResource("5_cquby")
+Active = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D10/SmashSpace" index="0"]
+transform = Transform3D(1.0000012, 2.9802322e-08, 1.8957871e-07, -2.1913729e-07, -4.8603397e-08, -1.0000008, 9.313226e-08, 1, 3.8417056e-09, 0.14337993, -0.26862907, 0.16139519)
+shape = SubResource("CapsuleShape3D_tdr2s")
+
+[node name="BoneAttachment3D11" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="12"]
+transform = Transform3D(0.99843276, -0.055885307, -0.0029551631, 0.055952456, 0.9978885, 0.03297457, 0.0011061279, -0.033088244, 0.99945164, -1.5194591, 18.917557, -0.8996328)
+bone_name = "Bone.011"
+bone_idx = 10
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D11" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D11/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 9.313225e-08, -4.07094e-15, 0, -4.371139e-08, -1, -9.313225e-08, 1, -4.371139e-08, 0, 0.8440838, 0)
+shape = SubResource("CapsuleShape3D_dkjrp")
+
+[node name="SmashSpace" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D11" index="1" groups=["SmashSpace"]]
+script = ExtResource("5_cquby")
+Active = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D11/SmashSpace" index="0"]
+transform = Transform3D(0.99999917, -2.6077032e-08, 2.401066e-08, 3.569312e-08, -4.147296e-08, -0.99999964, 7.0780516e-08, 0.99999917, 3.0122465e-09, 0.14430833, -0.28632545, 0.16382441)
+shape = SubResource("CapsuleShape3D_kuwml")
+
+[node name="BoneAttachment3D12" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="13"]
+transform = Transform3D(0.9996116, -0.027855279, -0.00022904691, 0.027855266, 0.9994758, 0.016492397, -0.00023047486, -0.016492378, 0.99986386, -1.6312296, 20.913332, -0.96580935)
+bone_name = "Bone.012"
+bone_idx = 11
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D12" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D12/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0377483, 0)
+shape = SubResource("CapsuleShape3D_hkm3l")
+
+[node name="SmashSpace" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D12" index="1" groups=["SmashSpace"]]
+script = ExtResource("5_cquby")
+Active = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D12/SmashSpace" index="0"]
+transform = Transform3D(1.0000029, 0, -1.0197255e-08, -5.0167728e-09, -6.810296e-08, -0.9999996, 1.215376e-07, 1, -2.0256266e-08, 0.14502692, -0.30375862, 0.1413076)
+shape = SubResource("CapsuleShape3D_ban2i")
+
+[node name="BoneAttachment3D13" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="14"]
+transform = Transform3D(0.9995746, 0.029104557, 0.001780685, -0.029069483, 0.9994279, -0.017291171, -0.0022829194, 0.017232055, 0.999849, -1.6869402, 22.912281, -0.9987941)
+bone_name = "Bone.013"
+bone_idx = 12
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D13" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D13/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8440819, 0)
+shape = SubResource("CapsuleShape3D_m1cgw")
+
+[node name="SmashSpace" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D13" index="1" groups=["SmashSpace"]]
+script = ExtResource("5_cquby")
+Active = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D13/SmashSpace" index="0"]
+transform = Transform3D(1, -3.2410026e-07, -6.199116e-09, 1.3460522e-09, -4.377216e-08, -1, 3.222376e-07, 1, -4.4237822e-08, 0.300606, -0.088567734, 0.11601728)
+shape = SubResource("CapsuleShape3D_477q1")
+
+[node name="BoneAttachment3D14" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="15"]
+transform = Transform3D(0.98996687, 0.14124495, -0.003935024, -0.14107479, 0.9864364, -0.083914265, -0.0079708155, 0.08362748, 0.99646544, -1.628731, 24.911139, -0.96432996)
+bone_name = "Bone.014"
+bone_idx = 13
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D14" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D14/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7920799, 0)
+shape = SubResource("CapsuleShape3D_i8rdv")
+
+[node name="SmashSpace" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D14" index="1" groups=["SmashSpace"]]
+script = ExtResource("5_cquby")
+Active = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D14/SmashSpace" index="0"]
+transform = Transform3D(0.99999994, 3.7252903e-09, 7.269409e-08, 3.259629e-09, -1.8859282e-08, -0.999998, 0, 0.99999994, -1.4156103e-07, -0.16603422, -0.049333572, 0.10717103)
+shape = SubResource("CapsuleShape3D_ghg4w")
+
+[node name="BoneAttachment3D15" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="16"]
+transform = Transform3D(0.9406861, 0.33746144, -0.035069577, -0.337451, 0.9198909, -0.19982027, -0.035171464, 0.19980237, 0.97920495, -1.3462414, 26.88401, -0.79707515)
+bone_name = "Bone.015"
+bone_idx = 14
+
+[node name="AnimatableBody3D" type="RigidBody3D" parent="Armature/Skeleton3D/BoneAttachment3D15" index="0" groups=["CrackenTent", "sheildAffects"]]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+mass = 20000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D15/AnimatableBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50146484, 0)
+shape = SubResource("CapsuleShape3D_dtdw4")
+
+[node name="SmashSpace" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D15" index="1" groups=["SmashSpace"]]
+script = ExtResource("5_cquby")
+Active = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D15/SmashSpace" index="0"]
+transform = Transform3D(1, 2.3283064e-10, 2.8514478e-08, 3.068544e-08, -4.6100467e-08, -0.99999964, -8.3609484e-07, 1, -6.579794e-07, -0.11169481, -0.42192078, -0.0028572232)
+shape = SubResource("CapsuleShape3D_uh5rt")
+
 [node name="target" type="Marker3D" parent="Armature" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 33.396313, 0)
+transform = Transform3D(0.94304156, 0, 0.3327221, -7.450521e-08, 1.0000008, 2.384186e-07, -0.3327202, 0, 0.9430186, -17.867868, 17.543377, 0)
 
 [node name="pole" type="Marker3D" parent="Armature" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.676273, 0)
+transform = Transform3D(0.9430273, 0, 0.3327205, 0, 1, 0, -0.3327205, 0, 0.9430256, -6.0871067, 8.994877, 0.33122706)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Armature/pole" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_b3802")
+}
+movie_quit_on_finish = true
+
+[node name="Label3D" type="Label3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.265999, 0)
+text = "0.65633273124695"
+font_size = 500
+
+[connection signal="body_entered" from="Armature/Skeleton3D/BoneAttachment3D7/SmashSpace" to="Armature/Skeleton3D/BoneAttachment3D7/SmashSpace" method="_on_body_entered"]

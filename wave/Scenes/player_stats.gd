@@ -23,7 +23,7 @@ var currentMana:float = MaxMana:
 var casting:bool = false:
 	set(newVale):
 		if newVale and _EnoughManaToCast(CastRate):
-			print("thre was enough to cast")
+			#print("thre was enough to cast")
 			casting = true
 			finshedCastingCD = null
 		else:
@@ -34,7 +34,7 @@ var casting:bool = false:
 			var CD:SceneTreeTimer = get_tree().create_timer(3)
 			finshedCastingCD = CD
 			await CD.timeout
-			print("i waited i realy did")
+			#print("i waited i realy did")
 			if finshedCastingCD == CD:
 				regenMana = true
 
@@ -66,8 +66,14 @@ func _random_Current_rep():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if casting:
+		var DrainMulti:float = 0
+		if $"../PlacementHandler".Channeling:
+			DrainMulti +=1.0
+		if $"../RigidBody3D/ShieldSphere".shieldUp:
+			DrainMulti +=1.0
+		
 		currentMana -= (CastRate*delta)
-		if !_EnoughManaToCast(CastRate*delta):
+		if !_EnoughManaToCast(CastRate*delta*DrainMulti):
 			casting = false
 	elif regenMana:
 		currentMana += (RegenRate*delta)
