@@ -58,7 +58,7 @@ disable_receive_shadows = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uel0a"]
 
-[node name="Crate" type="RigidBody3D" node_paths=PackedStringArray("floatiesnode") groups=["CrackenTarget", "sheildAffects"]]
+[node name="Crate" type="RigidBody3D" node_paths=PackedStringArray("floatiesnode") groups=["CrackenTarget", "Crate", "sheildAffects"]]
 mass = 5.0
 script = ExtResource("1_uel0a")
 placementScene = ExtResource("2_r5o71")

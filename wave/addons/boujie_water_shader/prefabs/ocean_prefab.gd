@@ -13,6 +13,7 @@ func _on_water_material_designer_updated_lod(far_distance, middle_distance, unit
 
 @onready var ocean_material:Material =  self.material    
 @onready var water_level_y: float = self.global_position.y           # base level of the ocean plane
+
 var time:float = 0.0
 
 func _process(_delta):

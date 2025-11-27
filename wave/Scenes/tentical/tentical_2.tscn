@@ -646,9 +646,4 @@ libraries = {
 }
 movie_quit_on_finish = true
 
-[node name="Label3D" type="Label3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25.265999, 0)
-text = "0.65633273124695"
-font_size = 500
-
 [connection signal="body_entered" from="Armature/Skeleton3D/BoneAttachment3D7/SmashSpace" to="Armature/Skeleton3D/BoneAttachment3D7/SmashSpace" method="_on_body_entered"]

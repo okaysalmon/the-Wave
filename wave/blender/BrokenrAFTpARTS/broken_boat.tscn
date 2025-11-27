@@ -1,9 +1,10 @@
-[gd_scene load_steps=48 format=3 uid="uid://ugvpggev505b"]
+[gd_scene load_steps=49 format=3 uid="uid://ugvpggev505b"]
 
+[ext_resource type="Script" uid="uid://d1lgg3l85ubp7" path="res://blender/BrokenrAFTpARTS/broken_boat.gd" id="1_2w2iq"]
 [ext_resource type="Script" uid="uid://dsl2p21gugq8e" path="res://FloatClass/classFloatingRB.gd" id="1_gwa4g"]
 [ext_resource type="ArrayMesh" uid="uid://xtibgkir61en" path="res://blender/BrokenrAFTpARTS/1.res" id="1_qhevk"]
 [ext_resource type="ArrayMesh" uid="uid://dnn82yyc43e0s" path="res://blender/BrokenrAFTpARTS/2.res" id="2_gwa4g"]
-[ext_resource type="ArrayMesh" uid="uid://dos406hukjada" path="res://blender/BrokenrAFTpARTS/3.res" id="3_2w2iq"]
+[ext_resource type="ArrayMesh" uid="uid://nvhlv0k0lmba" path="res://blender/BrokenrAFTpARTS/3.res" id="3_2w2iq"]
 [ext_resource type="ArrayMesh" uid="uid://tj05yqwixneb" path="res://blender/BrokenrAFTpARTS/4.res" id="4_kgkql"]
 [ext_resource type="ArrayMesh" uid="uid://j4wxo5e6qdjw" path="res://blender/BrokenrAFTpARTS/5.res" id="5_x0phr"]
 [ext_resource type="ArrayMesh" uid="uid://dqpb684x012yn" path="res://blender/BrokenrAFTpARTS/6.res" id="6_6jjby"]
@@ -95,6 +96,7 @@ points = PackedVector3Array(5.0436087, 0.48362863, 4.9999995, 5.0388556, 0.49520
 points = PackedVector3Array(-5, -0.3577966, -4.46048, -5, -0.4583741, -4.404979, -5, 0.10772318, -4.46048, 5, -0.3577966, -4.46048, -5, -0.5, -4.2708755, 5, -0.4583741, -4.404979, -5, 0.20830071, -4.404979, -2.500979, 0.14538467, -4.46048, 5, 0.10772318, -4.46048, -5, -0.5, -3.6501827, 5, -0.5, -4.2708755, -5, 0.25, -4.2708755, -2.500979, 0.21931285, -4.404979, -1.250979, 0.15500194, -4.46048, 5, 0.20830071, -4.404979, 2.499021, 0.14538467, -4.46048, -5, -0.4583741, -3.5160792, 5, -0.5, -3.6501827, -0.0009789467, 0.22298354, -4.404979, -1.250979, 0.22217602, -4.404979, -5, 0.25, -3.6501827, 5, 0.25, -4.2708755, -0.0009789467, 0.15779167, -4.46048, 1.249021, 0.15500194, -4.46048, 2.499021, 0.21931285, -4.404979, -5, -0.3577966, -3.4604802, 5, -0.4583741, -3.5160792, 1.249021, 0.22217602, -4.404979, -5, 0.20830071, -3.5160792, -2.500979, 0.21931285, -3.5160792, -1.250979, 0.22217602, -3.5160792, -0.0009789467, 0.22298354, -3.5160792, 5, 0.25, -3.6501827, -5, 0.10772318, -3.4604802, 5, -0.3577966, -3.4604802, -2.500979, 0.14538467, -3.4604802, -1.250979, 0.15500194, -3.4604802, -0.0009789467, 0.15779167, -3.4604802, 1.249021, 0.22217602, -3.5160792, 2.499021, 0.21931285, -3.5160792, 5, 0.20830071, -3.5160792, 5, 0.10772318, -3.4604802, 1.249021, 0.15500194, -3.4604802, 2.499021, 0.14538467, -3.4604802)
 
 [node name="BrokenBoat" type="Node3D"]
+script = ExtResource("1_2w2iq")
 
 [node name="RigidBody3D23" type="RigidBody3D" parent="." node_paths=PackedStringArray("floatiesnode")]
 mass = 10.0

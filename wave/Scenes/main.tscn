@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://b2lf28ap3u3o0"]
+[gd_scene load_steps=50 format=3 uid="uid://b2lf28ap3u3o0"]
 
 [ext_resource type="Shader" uid="uid://c70rs3a7nbva2" path="res://SkyShader/SkyShader.tres" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://b1ifm0554gtdb" path="res://addons/boujie_water_shader/prefabs/outset_ocean.tscn" id="2_8gbba"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://caq2h6lmf1k54" path="res://Scenes/player_stats.gd" id="10_hptm8"]
 [ext_resource type="PackedScene" uid="uid://dt1340cijt1gd" path="res://Scenes/tentical/tentical_2.tscn" id="14_jkdf5"]
 [ext_resource type="Script" uid="uid://dj2fma4aphiml" path="res://addons/OSIK/constraints.gd" id="15_wsu2k"]
+[ext_resource type="Script" uid="uid://cga6nr73xfrxc" path="res://Scenes/fadeIn.gd" id="16_fevyy"]
 [ext_resource type="Script" uid="uid://djgt4n5lk02vr" path="res://Scenes/spawner.gd" id="16_k12tt"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
@@ -113,6 +114,45 @@ point_count = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kry3j"]
 size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b3802"]
+size = Vector3(9.794922, 5.7487793, 9.0078125)
+
+[sub_resource type="Animation" id="Animation_b3802"]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fevyy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hibaj"]
+_data = {
+&"FadeIn": SubResource("Animation_b3802"),
+&"RESET": SubResource("Animation_fevyy")
+}
 
 [sub_resource type="Resource" id="Resource_wsu2k"]
 script = ExtResource("15_wsu2k")
@@ -257,6 +297,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.4910793)
 [node name="float9" type="Marker3D" parent="RigidBody3D/floats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.471534, 0, 4.4910793)
 
+[node name="PointZone" type="Area3D" parent="RigidBody3D"]
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/PointZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4233398, 0)
+shape = SubResource("BoxShape3D_b3802")
+
 [node name="RigidBody3D2" parent="." node_paths=PackedStringArray("camera") groups=["CrackenTarget", "Player"] instance=ExtResource("6_21xkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21644783, 2.1217723, 0.15811825)
 camera = NodePath("../Camera3D")
@@ -303,6 +350,74 @@ offset_right = 4.0
 offset_bottom = 27.0
 max_value = 60.0
 value = 60.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 15
+
+[node name="CrateLable" type="Label" parent="CanvasLayer/Control/HBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Crates Collected"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="CrateCountLable" type="Label" parent="CanvasLayer/Control/HBoxContainer/MarginContainer2" groups=["crateCount"]]
+layout_mode = 2
+
+[node name="Timer" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="HBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Timer"]
+layout_mode = 2
+alignment = 1
+
+[node name="timerLable" type="Label" parent="CanvasLayer/Control/Timer/HBoxContainer"]
+layout_mode = 2
+text = "Time Till Rescue"
+horizontal_alignment = 1
+
+[node name="TimerCountLable" type="Label" parent="CanvasLayer/Control/Timer/HBoxContainer" groups=["timerText"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "01:30"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_hibaj")
+}
+script = ExtResource("16_fevyy")
 
 [node name="tentical2" parent="." instance=ExtResource("14_jkdf5")]
 transform = Transform3D(0.014468223, 0, -0.99989533, 0, 0.9999999, 0, 0.99989545, 0, 0.014468253, 0.98489, -34.486378, -16.716652)
@@ -370,9 +485,6 @@ transform = Transform3D(-0.28834063, 0.9563185, -0.048122607, -0.9558491, -0.290
 [node name="target" parent="tentical2/Armature" index="1"]
 transform = Transform3D(0.9430256, 0, 0.3327205, 0, 1, 0, -0.3327205, 0, 0.9430256, -17.867868, 17.543377, 0)
 
-[node name="Label3D" parent="tentical2" index="1"]
-text = "0.92422565817833"
-
 [node name="Spawner" type="Area3D" parent="."]
 transform = Transform3D(0.014468223, 0, -0.99989533, 0, 0.9999999, 0, 0.99989545, 0, 0.014468253, 0.98489, -34.486378, -16.716652)
 collision_layer = 0
@@ -386,5 +498,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9104843, 0.49950027, 1.005
 shape = SubResource("BoxShape3D_k12tt")
 
 [connection signal="body_entered" from="RigidBody3D" to="RigidBody3D" method="_on_body_entered"]
+[connection signal="body_entered" from="RigidBody3D/PointZone" to="PlayerStats" method="_on_point_zone_body_entered"]
+[connection signal="body_exited" from="RigidBody3D/PointZone" to="PlayerStats" method="_on_point_zone_body_exited"]
 
 [editable path="tentical2"]

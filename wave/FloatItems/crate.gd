@@ -9,6 +9,7 @@ extends FloatingRigidBody3d
 @onready var playerStats:Node = get_tree().get_first_node_in_group("PlayStats")
 
 var maxSubmergedTime = 25
+var inPointZone:bool = false
 
 var channeling:bool = false:
 	set(newValue):
