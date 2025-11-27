@@ -34,7 +34,7 @@ func _physics_float(delta:float) -> void:
 	if Water!=null:
 		submerged = false
 		for f in floaties:
-			var depth = - global_position.y + float_offset + $"../OutsetOcean".get_wave_height_at(f.global_position.x,global_position.z)
+			var depth = - global_position.y + float_offset + Water.get_wave_height_at(f.global_position.x,global_position.z)
 			if depth >0:
 				submerged = true
 				apply_force(Vector3.UP* float_force *(mass/floaties.size()) * gravity*gravity_scale * clampf(depth,0.2,5) , f.global_position - global_position)

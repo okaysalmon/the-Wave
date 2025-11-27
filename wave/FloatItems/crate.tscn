@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://lctcsca8amjt"]
+[gd_scene load_steps=11 format=4 uid="uid://lctcsca8amjt"]
 
 [ext_resource type="Script" uid="uid://c1xyatalxcogf" path="res://FloatItems/crate.gd" id="1_uel0a"]
 [ext_resource type="PackedScene" uid="uid://b170fdr280hse" path="res://FloatItems/placment_display.tscn" id="2_r5o71"]
 [ext_resource type="Material" uid="uid://g4456j7ke7be" path="res://FloatItems/Highlight.tres" id="2_sw3u2"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_sw3u2"]
+[ext_resource type="ArrayMesh" uid="uid://lsnc1wwb2i6s" path="res://blender/Crate.res" id="3_btdw0"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_r5o71"]
 _surfaces = [{
@@ -47,6 +46,8 @@ stencil_mode = 2
 stencil_flags = 2
 stencil_color = Color(0, 0, 0, 0)
 
+[sub_resource type="BoxMesh" id="BoxMesh_sw3u2"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5o71"]
 render_priority = 3
 transparency = 4
@@ -68,7 +69,7 @@ floatiesnode = NodePath("floats")
 metadata/_custom_type_script = "uid://dsl2p21gugq8e"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_sw3u2")
+mesh = ExtResource("3_btdw0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 visible = false
@@ -90,46 +91,8 @@ shape = SubResource("BoxShape3D_uel0a")
 
 [node name="floats" type="Marker3D" parent="."]
 
-[node name="float1" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45283318, 0, 0)
-
-[node name="float2" type="Marker3D" parent="floats"]
-
-[node name="float3" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47059107, 0, 0)
-
-[node name="float4" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45283318, 0, -0.45283312)
-
-[node name="float5" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.45283312)
-
-[node name="float6" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47059107, 0, -0.45283312)
-
-[node name="float7" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45283318, 0, 0.43507516)
-
-[node name="float8" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.43507516)
-
-[node name="float9" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47059107, 0, 0.43507516)
-
-[node name="float10" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45283318, 0.42180157, 0)
-
-[node name="float11" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42180157, 0)
-
-[node name="float12" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47059107, 0.42180157, 0)
-
 [node name="float13" type="Marker3D" parent="floats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45283318, 0.42180157, -0.45283312)
-
-[node name="float14" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42180157, -0.45283312)
 
 [node name="float15" type="Marker3D" parent="floats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47059107, 0.42180157, -0.45283312)
@@ -137,35 +100,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47059107, 0.42180157, -0.4
 [node name="float16" type="Marker3D" parent="floats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45283318, 0.42180157, 0.43507516)
 
-[node name="float17" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42180157, 0.43507516)
-
 [node name="float18" type="Marker3D" parent="floats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47059107, 0.42180157, 0.43507516)
 
-[node name="float19" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45283318, -0.48473597, 0)
-
-[node name="float20" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48473597, 0)
-
-[node name="float21" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47059107, -0.48473597, 0)
-
 [node name="float22" type="Marker3D" parent="floats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45283318, -0.48473597, -0.45283312)
-
-[node name="float23" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48473597, -0.45283312)
 
 [node name="float24" type="Marker3D" parent="floats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47059107, -0.48473597, -0.45283312)
 
 [node name="float25" type="Marker3D" parent="floats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45283318, -0.48473597, 0.43507516)
-
-[node name="float26" type="Marker3D" parent="floats"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48473597, 0.43507516)
 
 [node name="float27" type="Marker3D" parent="floats"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47059107, -0.48473597, 0.43507516)

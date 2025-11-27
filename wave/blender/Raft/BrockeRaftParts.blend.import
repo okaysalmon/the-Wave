@@ -1,0 +1,277 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://bbl4sc7bixhyv"
+path="res://.godot/imported/BrockeRaftParts.blend-aa8cc6f09ad0a2d06f86e3040843302c.scn"
+
+[deps]
+
+source_file="res://blender/Raft/BrockeRaftParts.blend"
+dest_files=["res://.godot/imported/BrockeRaftParts.blend-aa8cc6f09ad0a2d06f86e3040843302c.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"meshes": {
+"BrockeRaftParts_Cube_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/1.res",
+"save_to_file/path": "uid://bjwypo3pg5db1"
+},
+"BrockeRaftParts_Cube_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/2.res",
+"save_to_file/path": "uid://xymtr88nob80"
+},
+"BrockeRaftParts_Cube_006": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/30.res",
+"save_to_file/path": "uid://dphotkm5qfxc3"
+},
+"BrockeRaftParts_Cube_007": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/3.res",
+"save_to_file/path": "uid://nvhlv0k0lmba"
+},
+"BrockeRaftParts_Cube_008": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/4.res",
+"save_to_file/path": "uid://bdkmfga8g8o8v"
+},
+"BrockeRaftParts_Cube_009": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/5.res",
+"save_to_file/path": "uid://bhsy5m2vbkp6s"
+},
+"BrockeRaftParts_Cube_010": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/6.res",
+"save_to_file/path": "uid://dmica6s4r5ol4"
+},
+"BrockeRaftParts_Cube_011": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/7.res",
+"save_to_file/path": "uid://cmswl4c3qfvf2"
+},
+"BrockeRaftParts_Cube_012": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/8.res",
+"save_to_file/path": "uid://dri1booiwxopm"
+},
+"BrockeRaftParts_Cube_013": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/9.res",
+"save_to_file/path": "uid://dl0euv6qjgrnp"
+},
+"BrockeRaftParts_Cube_014": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/10.res",
+"save_to_file/path": "uid://d3u1d3eafsmxv"
+},
+"BrockeRaftParts_Cube_015": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/11.res",
+"save_to_file/path": "uid://71keycx2wuxw"
+},
+"BrockeRaftParts_Cube_016": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/12.res",
+"save_to_file/path": "uid://fywehh7g0bjt"
+},
+"BrockeRaftParts_Cube_017": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/13.res",
+"save_to_file/path": "uid://bol07pe3e4qe8"
+},
+"BrockeRaftParts_Cube_018": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/14.res",
+"save_to_file/path": "uid://dubtofwal301g"
+},
+"BrockeRaftParts_Cube_019": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/15.res",
+"save_to_file/path": "uid://qkma2y68yd7s"
+},
+"BrockeRaftParts_Cube_020": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/16.res",
+"save_to_file/path": "uid://cdgjiy6anyhdd"
+},
+"BrockeRaftParts_Cube_021": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/17.res",
+"save_to_file/path": "uid://dt8km7r5w2tfu"
+},
+"BrockeRaftParts_Cube_022": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/18.res",
+"save_to_file/path": "uid://co1wj7arfvkwm"
+},
+"BrockeRaftParts_Cube_023": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/19.res",
+"save_to_file/path": "uid://cwx5jo5r11rqu"
+},
+"BrockeRaftParts_Cube_024": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/20.res",
+"save_to_file/path": "uid://cejwhjc1dd7y3"
+},
+"BrockeRaftParts_Cube_025": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/21.res",
+"save_to_file/path": "uid://ce6hce7dfnenr"
+},
+"BrockeRaftParts_Cube_026": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://blender/BrokenrAFTpARTS/22.res",
+"save_to_file/path": "uid://c4n6ecl4jmntj"
+}
+},
+"nodes": {
+"PATH:Base area": {
+"import/skip_import": true
+},
+"PATH:Rail": {
+"import/skip_import": true
+}
+}
+}
+blender/nodes/visible=0
+blender/nodes/active_collection_only=false
+blender/nodes/punctual_lights=true
+blender/nodes/cameras=true
+blender/nodes/custom_properties=true
+blender/nodes/modifiers=1
+blender/meshes/colors=false
+blender/meshes/uvs=true
+blender/meshes/normals=true
+blender/meshes/export_geometry_nodes_instances=false
+blender/meshes/tangents=true
+blender/meshes/skins=2
+blender/meshes/export_bones_deforming_mesh_only=false
+blender/materials/unpack_enabled=true
+blender/materials/export_materials=1
+blender/animation/limit_playback=true
+blender/animation/always_sample=true
+blender/animation/group_tracks=true
+gltf/naming_version=2

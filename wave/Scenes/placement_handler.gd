@@ -59,7 +59,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if PlacementItem!= null:
 		if Channeling:
-			SelectedPlacementItem.moveToPlacement(global_position,delta)
+			if SelectedPlacementItem!=null and is_instance_valid(SelectedPlacementItem):
+				SelectedPlacementItem.moveToPlacement(global_position,delta)
+			else:
+				Channeling = false
 			if Input.is_action_just_released("select_item"):
 				Channeling = false
 		else:

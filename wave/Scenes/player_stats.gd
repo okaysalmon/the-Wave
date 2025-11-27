@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 		var DrainMulti:float = 0
 		if $"../PlacementHandler".Channeling:
 			DrainMulti +=1.0
-		if $"../RigidBody3D/ShieldSphere".shieldUp:
+		if is_instance_valid($"../RigidBody3D/ShieldSphere") and $"../RigidBody3D/ShieldSphere".shieldUp:
 			DrainMulti +=1.0
 		
 		currentMana -= (CastRate*delta)

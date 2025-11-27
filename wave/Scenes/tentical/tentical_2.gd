@@ -33,6 +33,8 @@ func _process(delta: float) -> void:
 	if state == STATES.Locking and target !=null and is_instance_valid(target):
 		look_at(Vector3(target.global_position.x,self.global_position.y,target.global_position.z),Vector3.UP)
 		move_to_target(delta)
+	elif state == STATES.Locking:
+		select_target()
 	pass
 
 func _was_hurt():
