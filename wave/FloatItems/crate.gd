@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 		else:
 			float_force -= delta/10
 			if global_position.y < -50:
-				print("Was lost to the deaps")
+				#print("Was lost to the deaps")
 				queue_free()
 	
 	pass

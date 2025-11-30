@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://d4j8c2bite2cd"]
+
+[ext_resource type="Script" uid="uid://dhu6366trm6mr" path="res://RBCharacter/RB_character+controler.gd" id="1_sjwds"]
+[ext_resource type="PackedScene" uid="uid://c47uthyrsni0n" path="res://blender/Raft/wizard.blend" id="2_32wsq"]
+[ext_resource type="Script" uid="uid://bo3elqcb32ddg" path="res://RBCharacter/CharGroundFinder.gd" id="2_41y84"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fbuy2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_41y84"]
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_32wsq"]
+radius = 0.4
+height = 1.8
+
+[node name="RigidBody3D2" type="RigidBody3D" node_paths=PackedStringArray("floatiesnode")]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 40.0
+physics_material_override = SubResource("PhysicsMaterial_fbuy2")
+script = ExtResource("1_sjwds")
+float_force = 1.1
+float_offset = 0.5
+floatiesnode = NodePath("Marker3D2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90382457, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_41y84")
+
+[node name="wizard" parent="." instance=ExtResource("2_32wsq")]
+
+[node name="Armature" parent="wizard" index="0"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90382457, 0)
+shape = SubResource("CapsuleShape3D_32wsq")
+
+[node name="CamSwivle" type="Node3D" parent="."]
+transform = Transform3D(-0.6739286, 0, -0.7387965, 0, 1, 0, 0.7387965, 0, -0.6739286, 0, 0.90382457, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CamSwivle"]
+transform = Transform3D(1, 0, 0, 0, 0.7289686, 0.6845471, 0, -0.6845471, 0.7289686, 0, 4.0683346, 4.236286)
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90382457, 0)
+
+[node name="GroundRayCast" type="RayCast3D" parent="Marker3D"]
+unique_name_in_owner = true
+top_level = true
+target_position = Vector3(0, -1.1, 0)
+script = ExtResource("2_41y84")
+
+[node name="Marker3D2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90382457, 0)
+
+[node name="float" type="Marker3D" parent="Marker3D2"]
+
+[editable path="wizard"]

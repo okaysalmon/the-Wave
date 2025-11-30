@@ -19,7 +19,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	print("this was Called")
+	#print("this was Called")
 	if body.is_in_group("CrackenTent"):
 		var MainNode = body.get_parent().get_parent().get_parent().get_parent()
 		if MainNode.state == MainNode.STATES.Attacking:

@@ -3,6 +3,8 @@ extends FloatingRigidBody3d
 @export var camera:Node3D = defaltCame
 
 @onready var defaltCame = $CamSwivle
+var current_lookAt_Adjust:Vector3
+var lookAt_Adjust:Vector3
 var acceleration:float = 15.0
 var accelerationMultiplier:float = 1.5
 var jumpVelocity:float = 40.0
@@ -60,6 +62,7 @@ func _physics_process(delta: float) -> void:
 			apply_central_force(-goundNormals*gravity)
 			var gravRist = Vector3(0,goundNormals.y*mass*gravity/2,0)
 			apply_central_force(gravRist)
+		lookAt_Adjust = dir
 	if submerged:
 		if !landCoolDownOnJump and Input.is_action_just_pressed("move_jump"):
 			landCoolDownOnJump = true
@@ -73,11 +76,17 @@ func _physics_process(delta: float) -> void:
 		dir = Vector3(dir.x,0,dir.z)
 		var goundNormals:Vector3 = %GroundRayCast.get_collision_normal()
 		dir = dir.slide(goundNormals.normalized())
+		lookAt_Adjust = dir
 		#print("pre " +str(velocity))
 		velocity = lerp(velocity,dir*SPEED*mass,acceleration* accelerationMultiplier*delta)
 		#print(velocity)
 		apply_central_force(velocity)
-		
+	
+	if lookAt_Adjust!=null:
+		current_lookAt_Adjust = current_lookAt_Adjust.lerp(lookAt_Adjust,0.1)
+		if !(global_position+current_lookAt_Adjust).is_equal_approx($wizard.global_position):
+			$wizard.look_at(global_position+current_lookAt_Adjust,Vector3.UP)
+	 
 		
 #need to creat a slide state, if in slide then this logic is changed to prevend sudden stop
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:

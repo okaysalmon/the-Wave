@@ -165,7 +165,8 @@ func get_bone_length(skeleton_node: Skeleton3D, bone_index: int) -> float:
 		var bone_length: float = bone_origin.distance_to(child_origin) * global_scale.y
 		return bone_length
 	else:
-		push_warning("tip length used, as bone has no child")
+		if Engine.is_editor_hint():
+			push_warning("tip length used, as bone has no child")
 		return tipBoneLenght * global_scale.y
 
 func _creat_bone_current_pose_list():

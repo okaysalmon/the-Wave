@@ -1,12 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://d4j8c2bite2cd"]
+[gd_scene load_steps=11 format=3 uid="uid://d4j8c2bite2cd"]
 
 [ext_resource type="Script" uid="uid://dhu6366trm6mr" path="res://RBCharacter/RB_character+controler.gd" id="1_sjwds"]
+[ext_resource type="PackedScene" uid="uid://c47uthyrsni0n" path="res://blender/Raft/wizard.blend" id="2_32wsq"]
 [ext_resource type="Script" uid="uid://bo3elqcb32ddg" path="res://RBCharacter/CharGroundFinder.gd" id="2_41y84"]
+[ext_resource type="Script" uid="uid://g3m32814700a" path="res://addons/OSIK/OS_IK.gd" id="3_lvwnr"]
+[ext_resource type="Script" uid="uid://dj2fma4aphiml" path="res://addons/OSIK/constraints.gd" id="4_pbvat"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fbuy2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_41y84"]
 height = 1.8
+
+[sub_resource type="Resource" id="Resource_pbvat"]
+script = ExtResource("4_pbvat")
+boneName = "Leg.L.001"
+limitRoll = true
+
+[sub_resource type="Resource" id="Resource_q6ahd"]
+script = ExtResource("4_pbvat")
+boneName = "Leg.L"
+limitRoll = true
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_32wsq"]
 radius = 0.4
@@ -19,23 +32,100 @@ axis_lock_angular_z = true
 mass = 40.0
 physics_material_override = SubResource("PhysicsMaterial_fbuy2")
 script = ExtResource("1_sjwds")
-float_force = 1.1
-float_offset = 0.5
+float_force = 0.8
 floatiesnode = NodePath("Marker3D2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90382457, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_41y84")
 
+[node name="wizard" parent="." instance=ExtResource("2_32wsq")]
+
+[node name="Armature" parent="wizard" index="0"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="OSIK-RL" type="SkeletonModifier3D" parent="wizard/Armature/Skeleton3D" index="6" node_paths=PackedStringArray("targetNode", "poleNode")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("3_lvwnr")
+targetNode = NodePath("ftr")
+poleNode = NodePath("fptr")
+GlobalTargetRotation = true
+LockToRestRoll = true
+IKLength = 2
+metadata/_custom_type_script = "uid://g3m32814700a"
+
+[node name="ftr" type="Marker3D" parent="wizard/Armature/Skeleton3D/OSIK-RL"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.1445347, 0.03488779, 0.024919868)
+top_level = true
+
+[node name="fptr" type="Marker3D" parent="wizard/Armature/Skeleton3D/OSIK-RL"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.1445347, 0.44855708, -0.32894182)
+
+[node name="OSIK2-LL" type="SkeletonModifier3D" parent="wizard/Armature/Skeleton3D" index="7" node_paths=PackedStringArray("targetNode", "poleNode")]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.65334e-08, 0, -0.9898267)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("3_lvwnr")
+targetNode = NodePath("ftl")
+poleNode = NodePath("fptl")
+copyTargetRotation = true
+GlobalTargetRotation = true
+targetBone = "Leg.L.001"
+IKLength = 2
+useSlerp = false
+Limits = Array[ExtResource("4_pbvat")]([SubResource("Resource_pbvat"), SubResource("Resource_q6ahd")])
+metadata/_custom_type_script = "uid://g3m32814700a"
+
+[node name="ftl" type="Marker3D" parent="wizard/Armature/Skeleton3D/OSIK2-LL"]
+transform = Transform3D(0.8012939, -0.023079842, -0.597826, -0.59388304, -0.15149844, -0.79015857, -0.07233294, 0.98818827, -0.1351013, -0.15458114, 0.344312, -1.0323924)
+top_level = true
+
+[node name="fptl" type="Marker3D" parent="wizard/Armature/Skeleton3D/OSIK2-LL"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.04693541, 0.8318283, -1.5609798)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90382457, 0)
 shape = SubResource("CapsuleShape3D_32wsq")
 
 [node name="CamSwivle" type="Node3D" parent="."]
-transform = Transform3D(-0.6739286, 0, -0.7387965, 0, 1, 0, 0.7387965, 0, -0.6739286, 0, 0, 0)
+transform = Transform3D(-0.6739286, 0, -0.7387965, 0, 1, 0, 0.7387965, 0, -0.6739286, 0, 0.90382457, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CamSwivle"]
 transform = Transform3D(1, 0, 0, 0, 0.7289686, 0.6845471, 0, -0.6845471, 0.7289686, 0, 4.0683346, 4.236286)
 
 [node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90382457, 0)
 
 [node name="GroundRayCast" type="RayCast3D" parent="Marker3D"]
 unique_name_in_owner = true
@@ -44,5 +134,8 @@ target_position = Vector3(0, -1.1, 0)
 script = ExtResource("2_41y84")
 
 [node name="Marker3D2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90382457, 0)
 
 [node name="float" type="Marker3D" parent="Marker3D2"]
+
+[editable path="wizard"]
