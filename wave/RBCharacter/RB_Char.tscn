@@ -1,15 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://d4j8c2bite2cd"]
+[gd_scene load_steps=21 format=3 uid="uid://d4j8c2bite2cd"]
 
 [ext_resource type="Script" uid="uid://dhu6366trm6mr" path="res://RBCharacter/RB_character+controler.gd" id="1_sjwds"]
 [ext_resource type="PackedScene" uid="uid://c47uthyrsni0n" path="res://blender/Raft/wizard.blend" id="2_32wsq"]
 [ext_resource type="Script" uid="uid://bo3elqcb32ddg" path="res://RBCharacter/CharGroundFinder.gd" id="2_41y84"]
 [ext_resource type="Script" uid="uid://g3m32814700a" path="res://addons/OSIK/OS_IK.gd" id="3_lvwnr"]
 [ext_resource type="Script" uid="uid://dj2fma4aphiml" path="res://addons/OSIK/constraints.gd" id="4_pbvat"]
+[ext_resource type="Script" uid="uid://bjo2s3dtdkbmb" path="res://RBCharacter/AutoPlayAnim.gd" id="5_2wfv5"]
+[ext_resource type="Script" uid="uid://bxb1ou6hukfsg" path="res://RBCharacter/footPositioner.gd" id="5_q6ahd"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fbuy2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_41y84"]
 height = 1.8
+
+[sub_resource type="Resource" id="Resource_2wfv5"]
+script = ExtResource("4_pbvat")
+boneName = "Leg.R.001"
+
+[sub_resource type="Resource" id="Resource_0igjo"]
+script = ExtResource("4_pbvat")
+boneName = "Leg.R"
 
 [sub_resource type="Resource" id="Resource_pbvat"]
 script = ExtResource("4_pbvat")
@@ -21,17 +31,119 @@ script = ExtResource("4_pbvat")
 boneName = "Leg.L"
 limitRoll = true
 
+[sub_resource type="Animation" id="Animation_0igjo"]
+resource_name = "swim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.15405062, 0, 1.3467533e-08), Vector3(0.15405068, 0, -0.63411796), Vector3(0.15405056, 0, 0.7612592), Vector3(0.15405062, 0, 1.3467533e-08)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../SwimFootRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.23078519, 0, -2.0175882e-08), Vector3(-0.23078525, 0, 0.6422824), Vector3(-0.23078515, 0, -0.5197064), Vector3(-0.23078519, 0, -2.0175882e-08)]
+}
+
+[sub_resource type="Animation" id="Animation_0g2b0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.15405062, 0, 1.3467533e-08)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../SwimFootRight:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.23078519, 0, -2.0175882e-08)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_px2wc"]
+_data = {
+&"RESET": SubResource("Animation_0g2b0"),
+&"swim": SubResource("Animation_0igjo")
+}
+
+[sub_resource type="Animation" id="Animation_q6ahd"]
+resource_name = "step"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.255, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, 0), Vector3(0, -0.25, 0), Vector3(0, -0.1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2wfv5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0igjo"]
+_data = {
+&"RESET": SubResource("Animation_2wfv5"),
+&"step": SubResource("Animation_q6ahd")
+}
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_32wsq"]
 radius = 0.4
 height = 1.8
 
-[node name="RigidBody3D2" type="RigidBody3D" node_paths=PackedStringArray("floatiesnode")]
+[node name="RigidBody3D2" type="RigidBody3D" node_paths=PackedStringArray("RightFootRC", "RightFootRCpos", "LeftFootRC", "LeftFootRCpos", "floatiesnode")]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 mass = 40.0
 physics_material_override = SubResource("PhysicsMaterial_fbuy2")
 script = ExtResource("1_sjwds")
+RightFootRC = NodePath("RayCast3D2")
+RightFootRCpos = NodePath("wizard/RCRpos")
+LeftFootRC = NodePath("RayCast3D")
+LeftFootRCpos = NodePath("wizard/RCLpos")
 float_force = 0.8
 floatiesnode = NodePath("Marker3D2")
 
@@ -44,6 +156,37 @@ mesh = SubResource("CapsuleMesh_41y84")
 
 [node name="Armature" parent="wizard" index="0"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="wizard/Armature" index="0"]
+bones/17/rotation = Quaternion(0.01169234, 0.07788407, -0.04509621, 0.99587333)
+bones/18/rotation = Quaternion(0.0410541, -0.00018429407, -0.017296532, 0.99900717)
+bones/19/rotation = Quaternion(0.15255673, 0.06609151, -0.10274327, 0.98071516)
+bones/22/rotation = Quaternion(0.02800276, 0.051557586, -0.038623124, 0.9975299)
+bones/23/rotation = Quaternion(0.04100175, 0.00069729605, -0.017460713, 0.9990063)
+bones/24/rotation = Quaternion(0.117900044, 0.034567215, -0.06920251, 0.99000794)
+bones/27/rotation = Quaternion(0.040306054, 0.026841566, -0.030795576, 0.99835193)
+bones/28/rotation = Quaternion(0.040807083, 0.0010185816, -0.017395876, 0.9990151)
+bones/29/rotation = Quaternion(0.0998302, 0.016503062, -0.050786756, 0.9935705)
+bones/32/rotation = Quaternion(0.042007957, 0.009586351, -0.022525942, 0.9988173)
+bones/33/rotation = Quaternion(0.041002054, 0.0006918329, -0.017457893, 0.9990063)
+bones/34/rotation = Quaternion(0.117900655, 0.034571514, -0.06920579, 0.99000746)
+bones/37/rotation = Quaternion(-0.04242429, -0.17940123, 0.17606121, 0.9669633)
+bones/38/rotation = Quaternion(-0.051926866, -0.13451096, 0.12988049, 0.98099005)
+bones/40/rotation = Quaternion(0.40053615, 0.60469407, 0.6262835, -0.28580573)
+bones/45/rotation = Quaternion(0.01169234, -0.07788407, 0.04509621, 0.99587333)
+bones/46/rotation = Quaternion(0.0410541, 0.00018429407, 0.017296532, 0.99900717)
+bones/47/rotation = Quaternion(0.15255673, -0.06609151, 0.10274327, 0.98071516)
+bones/50/rotation = Quaternion(0.02800276, -0.051557586, 0.038623124, 0.9975299)
+bones/51/rotation = Quaternion(0.04100175, -0.00069729605, 0.017460713, 0.9990063)
+bones/52/rotation = Quaternion(0.117900044, -0.034567215, 0.06920251, 0.99000794)
+bones/55/rotation = Quaternion(0.040306054, -0.026841566, 0.030795576, 0.99835193)
+bones/56/rotation = Quaternion(0.040807083, -0.0010185816, 0.017395876, 0.9990151)
+bones/57/rotation = Quaternion(0.0998302, -0.016503062, 0.050786756, 0.9935705)
+bones/60/rotation = Quaternion(0.042007957, -0.009586351, 0.022525942, 0.9988173)
+bones/61/rotation = Quaternion(0.041002054, -0.0006918329, 0.017457893, 0.9990063)
+bones/62/rotation = Quaternion(0.117900655, -0.034571514, 0.06920579, 0.99000746)
+bones/65/rotation = Quaternion(-0.04242429, 0.17940123, -0.17606121, 0.9669633)
+bones/66/rotation = Quaternion(-0.051926866, 0.13451096, -0.12988049, 0.98099005)
 
 [node name="OSIK-RL" type="SkeletonModifier3D" parent="wizard/Armature/Skeleton3D" index="6" node_paths=PackedStringArray("targetNode", "poleNode")]
 _import_path = NodePath("")
@@ -64,19 +207,18 @@ visibility_parent = NodePath("")
 active = true
 influence = 1.0
 script = ExtResource("3_lvwnr")
-targetNode = NodePath("ftr")
+targetNode = NodePath("../../../../RayCast3D/ftr")
 poleNode = NodePath("fptr")
+copyTargetRotation = true
 GlobalTargetRotation = true
-LockToRestRoll = true
+targetBone = "Leg.R.001"
 IKLength = 2
+useSlerp = false
+Limits = Array[ExtResource("4_pbvat")]([SubResource("Resource_2wfv5"), SubResource("Resource_0igjo")])
 metadata/_custom_type_script = "uid://g3m32814700a"
 
-[node name="ftr" type="Marker3D" parent="wizard/Armature/Skeleton3D/OSIK-RL"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.1445347, 0.03488779, 0.024919868)
-top_level = true
-
 [node name="fptr" type="Marker3D" parent="wizard/Armature/Skeleton3D/OSIK-RL"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.1445347, 0.44855708, -0.32894182)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.1445347, 0.44855708, -0.65887386)
 
 [node name="OSIK2-LL" type="SkeletonModifier3D" parent="wizard/Armature/Skeleton3D" index="7" node_paths=PackedStringArray("targetNode", "poleNode")]
 _import_path = NodePath("")
@@ -88,7 +230,7 @@ process_thread_group = 0
 physics_interpolation_mode = 0
 auto_translate_mode = 0
 editor_description = ""
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.65334e-08, 0, -0.9898267)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 rotation_edit_mode = 0
 rotation_order = 2
 top_level = false
@@ -97,7 +239,7 @@ visibility_parent = NodePath("")
 active = true
 influence = 1.0
 script = ExtResource("3_lvwnr")
-targetNode = NodePath("ftl")
+targetNode = NodePath("../../../../RayCast3D2/ftl")
 poleNode = NodePath("fptl")
 copyTargetRotation = true
 GlobalTargetRotation = true
@@ -107,12 +249,43 @@ useSlerp = false
 Limits = Array[ExtResource("4_pbvat")]([SubResource("Resource_pbvat"), SubResource("Resource_q6ahd")])
 metadata/_custom_type_script = "uid://g3m32814700a"
 
-[node name="ftl" type="Marker3D" parent="wizard/Armature/Skeleton3D/OSIK2-LL"]
-transform = Transform3D(0.8012939, -0.023079842, -0.597826, -0.59388304, -0.15149844, -0.79015857, -0.07233294, 0.98818827, -0.1351013, -0.15458114, 0.344312, -1.0323924)
-top_level = true
-
 [node name="fptl" type="Marker3D" parent="wizard/Armature/Skeleton3D/OSIK2-LL"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.04693541, 0.8318283, -1.5609798)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.04693541, 0.8318283, -0.9010852)
+
+[node name="Jump Foot Right" type="Marker3D" parent="wizard/Armature" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18668368, 0.4550404, 0.31502756)
+
+[node name="Jump foot Left" type="Marker3D" parent="wizard/Armature" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15167996, 0.3383634, 0.3150276)
+
+[node name="Rest Foot Right2" type="Marker3D" parent="wizard/Armature" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18668365, 1.4887674, -0.046249285)
+
+[node name="Rest foot Left2" type="Marker3D" parent="wizard/Armature" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15168, 1.3720903, -0.046249256)
+
+[node name="SwimFootRight" type="Marker3D" parent="wizard/Armature" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23078519, 0, -2.0175882e-08)
+
+[node name="SwimFootLeft" type="Marker3D" parent="wizard/Armature" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15405062, 0, 1.3467533e-08)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="wizard/Armature/SwimFootLeft"]
+libraries = {
+&"": SubResource("AnimationLibrary_px2wc")
+}
+script = ExtResource("5_2wfv5")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="wizard"]
+libraries = {
+&"": SubResource("AnimationLibrary_0igjo")
+}
+
+[node name="RCRpos" type="Marker3D" parent="wizard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.177, 1.2541809, -0.32364273)
+
+[node name="RCLpos" type="Marker3D" parent="wizard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.177, 1.2541809, -0.32364273)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90382457, 0)
@@ -137,5 +310,36 @@ script = ExtResource("2_41y84")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90382457, 0)
 
 [node name="float" type="Marker3D" parent="Marker3D2"]
+
+[node name="RayCast3D" type="RayCast3D" parent="." node_paths=PackedStringArray("Target", "Master", "JumpSpot", "RestSpot", "SWIMSpot")]
+transform = Transform3D(1, 2.9802322e-08, 0, -2.9802322e-08, 1, -7.450581e-09, 0, -7.450581e-09, 1, -2.9802322e-08, 0, 0)
+top_level = true
+target_position = Vector3(0, -2.5, 0)
+script = ExtResource("5_q6ahd")
+Target = NodePath("ftr")
+Master = NodePath("..")
+JumpSpot = NodePath("../wizard/Armature/Jump Foot Right")
+RestSpot = NodePath("../wizard/Armature/Rest Foot Right2")
+SWIMSpot = NodePath("../wizard/Armature/SwimFootRight")
+
+[node name="ftr" type="Marker3D" parent="RayCast3D"]
+transform = Transform3D(0.7937418, 0.009183472, 0.6081857, 0.6080656, -0.03693174, -0.7930273, 0.01517861, 0.9992757, -0.034898415, 0.1445347, 0.03488779, 0.024919868)
+top_level = true
+
+[node name="RayCast3D2" type="RayCast3D" parent="." node_paths=PackedStringArray("Target", "Master", "JumpSpot", "RestSpot", "SWIMSpot")]
+transform = Transform3D(1, 2.9802322e-08, 0, -2.9802322e-08, 1, -7.450581e-09, 0, -7.450581e-09, 1, -2.9802322e-08, 0, 0)
+top_level = true
+target_position = Vector3(0, -2.5, 0)
+script = ExtResource("5_q6ahd")
+Right = false
+Target = NodePath("ftl")
+Master = NodePath("..")
+JumpSpot = NodePath("../wizard/Armature/Jump foot Left")
+RestSpot = NodePath("../wizard/Armature/Rest foot Left2")
+SWIMSpot = NodePath("../wizard/Armature/SwimFootLeft")
+
+[node name="ftl" type="Marker3D" parent="RayCast3D2"]
+transform = Transform3D(0.8012939, -0.023079842, -0.597826, -0.59388304, -0.15149844, -0.79015857, -0.07233294, 0.98818827, -0.1351013, -0.15458114, 0.344312, -1.0323924)
+top_level = true
 
 [editable path="wizard"]

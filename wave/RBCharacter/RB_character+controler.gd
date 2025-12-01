@@ -2,7 +2,14 @@ extends FloatingRigidBody3d
 
 @export var camera:Node3D = defaltCame
 
+@export var RightFootRC:FootPositioner
+@export var RightFootRCpos:Node3D
+@export var LeftFootRC:FootPositioner
+@export var LeftFootRCpos:Node3D
+
 @onready var defaltCame = $CamSwivle
+var stepIsRight:bool =true
+var stepping:bool =  false
 var current_lookAt_Adjust:Vector3
 var lookAt_Adjust:Vector3
 var acceleration:float = 15.0
@@ -40,6 +47,10 @@ func _physics_process(delta: float) -> void:
 	prev_velocity = velocity
 	grounded = _is_grounded()
 	if grounded:
+		if RightFootRC.CurrentState == RightFootRC.State.JUMPING:
+			RightFootRC.CurrentState = RightFootRC.State.STANDING
+		if LeftFootRC.CurrentState == LeftFootRC.State.JUMPING:
+			LeftFootRC.CurrentState = LeftFootRC.State.STANDING
 		moveInput = Input.get_vector("move_left","move_right","move_down","move_up")
 		var dir = Vector3.ZERO
 		dir += moveInput.x*camera.global_basis.x
@@ -51,6 +62,11 @@ func _physics_process(delta: float) -> void:
 		#print("pre " +str(velocity))
 		velocity = lerp(velocity,dir*SPEED*mass,acceleration* accelerationMultiplier*delta)
 		#print(velocity)
+		if dir != Vector3.ZERO:
+			step()
+		else:
+			RightFootRC.CurrentState = RightFootRC.State.STANDING
+			LeftFootRC.CurrentState = LeftFootRC.State.STANDING
 		apply_central_force(velocity)
 		#print(goundNormals)
 		if !landCoolDownOnJump and Input.is_action_just_pressed("move_jump"):
@@ -63,11 +79,16 @@ func _physics_process(delta: float) -> void:
 			var gravRist = Vector3(0,goundNormals.y*mass*gravity/2,0)
 			apply_central_force(gravRist)
 		lookAt_Adjust = dir
+	else:
+		RightFootRC.CurrentState = RightFootRC.State.JUMPING
+		LeftFootRC.CurrentState = LeftFootRC.State.JUMPING
 	if submerged:
 		if !landCoolDownOnJump and Input.is_action_just_pressed("move_jump"):
 			landCoolDownOnJump = true
 			grounded = false
 			apply_central_force(Vector3.UP*mass*gravity*gravity_scale*jumpVelocity*1.2)
+		RightFootRC.CurrentState = RightFootRC.State.SWIMING
+		LeftFootRC.CurrentState = LeftFootRC.State.SWIMING
 		moveInput = Input.get_vector("move_left","move_right","move_down","move_up")
 		var dir = Vector3.ZERO
 		dir += moveInput.x*camera.global_basis.x
@@ -107,3 +128,14 @@ func _is_grounded()->bool:
 		return %GroundRayCast.is_colliding()
 	else:
 		return false
+
+func step():
+	if !stepping:
+		stepping = true
+		$wizard/AnimationPlayer2.play("step")
+		if stepIsRight:
+			RightFootRC._step()
+		else:
+			LeftFootRC._step()
+		stepIsRight = !stepIsRight
+	pass
