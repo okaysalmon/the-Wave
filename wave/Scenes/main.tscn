@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://b2lf28ap3u3o0"]
+[gd_scene load_steps=51 format=3 uid="uid://b2lf28ap3u3o0"]
 
 [ext_resource type="Shader" uid="uid://c70rs3a7nbva2" path="res://SkyShader/SkyShader.tres" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://b1ifm0554gtdb" path="res://addons/boujie_water_shader/prefabs/outset_ocean.tscn" id="2_8gbba"]
@@ -13,17 +13,18 @@
 [ext_resource type="Shader" uid="uid://dcko35tc4k343" path="res://addons/nojoule-energy-shield/shield.gdshader" id="8_jkdf5"]
 [ext_resource type="Script" uid="uid://b6jg87yr2f1h8" path="res://Scenes/placement_handler.gd" id="9_hptm8"]
 [ext_resource type="Texture2D" uid="uid://dnqegf8mxqli" path="res://addons/nojoule-energy-shield/shield_noise.tres" id="9_wsu2k"]
-[ext_resource type="ArrayMesh" uid="uid://beyka2ev6yxde" path="res://blender/Raft/RaftMesh.res" id="10_h1bgf"]
+[ext_resource type="ArrayMesh" uid="uid://cnmudgi8ex0fv" path="res://blender/Raft/RaftMesh.res" id="10_h1bgf"]
 [ext_resource type="Script" uid="uid://caq2h6lmf1k54" path="res://Scenes/player_stats.gd" id="10_hptm8"]
 [ext_resource type="PackedScene" uid="uid://dt1340cijt1gd" path="res://Scenes/tentical/tentical_2.tscn" id="14_jkdf5"]
 [ext_resource type="Script" uid="uid://dj2fma4aphiml" path="res://addons/OSIK/constraints.gd" id="15_wsu2k"]
 [ext_resource type="Script" uid="uid://cga6nr73xfrxc" path="res://Scenes/fadeIn.gd" id="16_fevyy"]
+[ext_resource type="Script" uid="uid://d0jp1pp6td50x" path="res://Scenes/OverlayText.gd" id="16_hibaj"]
 [ext_resource type="Script" uid="uid://djgt4n5lk02vr" path="res://Scenes/spawner.gd" id="16_k12tt"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8gbba"]
 noise_type = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_21xkr"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fevyy"]
 noise = SubResource("FastNoiseLite_8gbba")
 color_ramp = ExtResource("2_jjvhh")
 seamless = true
@@ -32,14 +33,14 @@ seamless = true
 shader = ExtResource("1_bo1nx")
 shader_parameter/Texture2DParameter = ExtResource("3_jjvhh")
 shader_parameter/Vector2Parameter2 = Vector2(0, 0)
-shader_parameter/SkyTexture = SubResource("NoiseTexture2D_21xkr")
+shader_parameter/SkyTexture = SubResource("NoiseTexture2D_fevyy")
 
-[sub_resource type="Sky" id="Sky_6bp64"]
+[sub_resource type="Sky" id="Sky_hibaj"]
 sky_material = SubResource("ShaderMaterial_jjvhh")
 
 [sub_resource type="Environment" id="Environment_21xkr"]
 background_mode = 2
-sky = SubResource("Sky_6bp64")
+sky = SubResource("Sky_hibaj")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_344ge"]
 
@@ -157,47 +158,38 @@ _data = {
 [sub_resource type="Resource" id="Resource_wsu2k"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.016"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_k12tt"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.015"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_h1bgf"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.014"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_b3802"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.013"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_fevyy"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.012"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_hibaj"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.011"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_pdsj5"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.010"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_ee4r6"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.009"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_gt3je"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.008"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_3pmx8"]
 script = ExtResource("15_wsu2k")
@@ -206,27 +198,22 @@ boneName = "Bone.007"
 [sub_resource type="Resource" id="Resource_u50mg"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.006"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_cbgmd"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.005"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_1w6v2"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.004"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_ueoa1"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.002"
-limitRoll = null
 
 [sub_resource type="Resource" id="Resource_6vcvc"]
 script = ExtResource("15_wsu2k")
 boneName = "Bone.001"
-limitRoll = null
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k12tt"]
 size = Vector3(31.325336, 0.001, 38.57302)
@@ -404,7 +391,61 @@ theme_override_font_sizes/font_size = 33
 text = "01:30"
 horizontal_alignment = 1
 
+[node name="Control" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("16_hibaj")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -75.0
+offset_right = 520.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Control/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Control/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+text = "Left-click to select a container.
+Then move the mouse over where you want to place the crate.
+Hold down the left mouse button to channel the crate’s movement."
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/Control/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -520.0
+offset_top = -75.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Control/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Control/HBoxContainer3/MarginContainer"]
+layout_mode = 2
+text = "Right-click to Shield Raft
+to move use W,A,S,D and space to Jump
+Tab to hide all this text"
+horizontal_alignment = 2
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -438,49 +479,49 @@ Limits = Array[ExtResource("15_wsu2k")]([SubResource("Resource_wsu2k"), SubResou
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="BoneAttachment3D2" parent="tentical2/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.8923474, 0.45125076, 0.009424364, -0.45125073, 0.8915224, 0.039504416, 0.009424365, -0.039504416, 0.99917495, 0, 1, 0)
+transform = Transform3D(0.79580706, -0.60544837, 0.011110991, 0.60544837, 0.79520243, -0.032944974, 0.011110991, 0.032944974, 0.99939543, 0, 1, 0)
 
 [node name="BoneAttachment3D3" parent="tentical2/Armature/Skeleton3D" index="4"]
-transform = Transform3D(0.8762576, 0.48176023, 0.008923901, -0.48172268, 0.8754751, 0.03855661, 0.010762387, -0.038084373, 0.9992165, 0.9024992, 2.7830448, -0.07900867)
+transform = Transform3D(0.7958066, -0.6054488, 0.011110973, 0.60544884, 0.7952019, -0.032944947, 0.011111013, 0.03294493, 0.9993954, -1.210894, 2.590405, 0.0658898)
 
 [node name="BoneAttachment3D4" parent="tentical2/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.842799, 0.5381137, 0.01111702, -0.53814757, 0.84213454, 0.03474089, 0.009332525, -0.035262194, 0.9993344, 1.8660176, 4.5339956, -0.15517727)
+transform = Transform3D(0.79580635, -0.6054491, 0.01111101, 0.605449, 0.79520184, -0.032944918, 0.011110973, 0.032944925, 0.9993955, -2.4217894, 4.180809, 0.13177955)
 
 [node name="BoneAttachment3D5" parent="tentical2/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.7896296, 0.6133979, 0.015105266, -0.6135635, 0.7891639, 0.027573148, 0.004992783, -0.031040616, 0.9995056, 2.9422429, 6.2182636, -0.2257015)
+transform = Transform3D(0.7958067, -0.60544896, 0.011111024, 0.6054489, 0.7952022, -0.032944873, 0.011110925, 0.032944903, 0.9993957, -3.6326847, 5.771213, 0.19766928)
 
 [node name="BoneAttachment3D6" parent="tentical2/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.71510965, 0.6987915, 0.017562982, -0.6990121, 0.7148709, 0.018477364, 0.00035656337, -0.025490075, 0.99967504, 4.169036, 7.7965918, -0.28778258)
+transform = Transform3D(0.79580677, -0.6054492, 0.011111015, 0.6054492, 0.7952022, -0.032944866, 0.011110937, 0.03294489, 0.9993957, -4.8435802, 7.3616176, 0.26355895)
 
 [node name="BoneAttachment3D7" parent="tentical2/Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.61969507, 0.78467584, 0.016172322, -0.7848391, 0.6196207, 0.009868215, -0.0022773517, -0.018807953, 0.9998205, 5.566616, 9.226334, -0.33876264)
+transform = Transform3D(0.79580647, -0.6054493, 0.0111112865, 0.6054493, 0.79520184, -0.032945763, 0.011111276, 0.03294577, 0.9993953, -6.0544744, 8.952021, 0.32944855)
 
 [node name="BoneAttachment3D8" parent="tentical2/Armature/Skeleton3D" index="9"]
-transform = Transform3D(0.5064924, 0.8621671, 0.011533229, -0.86223716, 0.5064972, 0.0027201623, -0.0034963123, -0.0113221165, 0.99992967, 7.1359634, 10.465575, -0.37637848)
+transform = Transform3D(0.79580516, -0.60545063, 0.011110147, 0.6054507, 0.7952005, -0.032944154, 0.011111272, 0.032943778, 0.9993951, -7.2653704, 10.542423, 0.39533994)
 
 [node name="BoneAttachment3D9" parent="tentical2/Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.38106143, 0.92453307, 0.005558819, -0.92452896, 0.38108635, -0.0044218116, -0.0062065003, -0.0034543024, 0.9999748, 8.860294, 11.478571, -0.3990226)
+transform = Transform3D(0.79578865, -0.6054722, 0.01111037, 0.60547227, 0.79518425, -0.03293924, 0.0111090075, 0.0329397, 0.9993954, -8.47627, 12.132826, 0.46122742)
 
 [node name="BoneAttachment3D10" parent="tentical2/Armature/Skeleton3D" index="11"]
-transform = Transform3D(0.25048906, 0.9681191, -0.0010201163, -0.96803594, 0.25045338, -0.013418617, -0.012735328, 0.0043487283, 0.9999096, 10.709357, 12.240743, -0.4059313)
+transform = Transform3D(0.7956492, -0.6056559, 0.011103157, 0.605656, 0.7950464, -0.032892987, 0.011094307, 0.032895967, 0.99939734, -9.68721, 13.723194, 0.52710664)
 
 [node name="BoneAttachment3D11" parent="tentical2/Armature/Skeleton3D" index="12"]
-transform = Transform3D(0.12189801, 0.9925034, -0.008850074, -0.99228334, 0.12165754, -0.0239425, -0.022686327, 0.011700328, 0.9996742, 12.645592, 12.74165, -0.39723384)
+transform = Transform3D(0.7943445, -0.60736746, 0.01103426, 0.60736877, 0.79375625, -0.032468453, 0.010961766, 0.032492984, 0.9994122, -10.898519, 15.313287, 0.5928984)
 
 [node name="BoneAttachment3D12" parent="tentical2/Armature/Skeleton3D" index="13"]
-transform = Transform3D(0.0010542846, 0.99983156, -0.018307012, -0.99943876, 0.00044057454, -0.033497564, -0.03348387, 0.018332047, 0.999271, 14.630592, 12.984966, -0.3738331)
+transform = Transform3D(0.7821054, -0.6230604, 0.010344481, 0.62307084, 0.78164524, -0.028521746, 0.009685051, 0.028752342, 0.99954, -12.113254, 16.900805, 0.65788436)
 
 [node name="AnimatableBody3D" parent="tentical2/Armature/Skeleton3D/BoneAttachment3D12" index="0"]
 transform = Transform3D(1, 7.450581e-09, -2.9802322e-08, -3.7252903e-09, 1, 1.21071935e-08, 2.9802322e-08, 1.0244548e-08, 0.9999999, -0.2103486, -0.0854764, 0.026741028)
 
 [node name="BoneAttachment3D13" parent="tentical2/Armature/Skeleton3D" index="14"]
-transform = Transform3D(-0.10839856, 0.9936953, -0.028625919, -0.99318886, -0.10949101, -0.039836794, -0.042719897, 0.024112705, 0.9987959, 16.63025, 12.985845, -0.3371693)
+transform = Transform3D(0.6573844, -0.7535553, -0.0003328398, 0.7535315, 0.65736014, 0.008234112, -0.0059860777, -0.005663801, 0.9999661, -13.35937, 18.46409, 0.7153889)
 
 [node name="BoneAttachment3D14" parent="tentical2/Armature/Skeleton3D" index="15"]
-transform = Transform3D(-0.20489031, 0.97801965, -0.038689643, -0.97750866, -0.20648117, -0.042928595, -0.04997372, 0.029023789, 0.9983287, 18.61764, 12.766865, -0.28894374)
+transform = Transform3D(-0.15254714, -0.9708795, -0.18472251, 0.9672778, -0.18501422, 0.17361744, -0.202738, -0.15219325, 0.9673335, -14.866476, 19.77881, 0.7040613)
 
 [node name="BoneAttachment3D15" parent="tentical2/Armature/Skeleton3D" index="16"]
-transform = Transform3D(-0.28834063, 0.9563185, -0.048122607, -0.9558491, -0.2904461, -0.044639714, -0.056666728, 0.03312654, 0.9978435, 20.573673, 12.353902, -0.23089631)
+transform = Transform3D(-0.6695223, -0.4998395, -0.54945517, 0.5122202, -0.84638673, 0.14580789, -0.53793216, -0.18382035, 0.8227024, -16.80823, 19.408781, 0.3996755)
 
 [node name="target" parent="tentical2/Armature" index="1"]
 transform = Transform3D(0.9430256, 0, 0.3327205, 0, 1, 0, -0.3327205, 0, 0.9430256, -17.867868, 17.543377, 0)

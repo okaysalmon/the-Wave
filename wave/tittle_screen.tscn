@@ -1,0 +1,97 @@
+[gd_scene load_steps=15 format=3 uid="uid://8l1hjpx1oxdw"]
+
+[ext_resource type="Shader" uid="uid://c70rs3a7nbva2" path="res://SkyShader/SkyShader.tres" id="1_niwwa"]
+[ext_resource type="Gradient" uid="uid://bss21d0wfnjfq" path="res://SkyShader/colourRampSky.tres" id="2_h0txe"]
+[ext_resource type="Texture2D" uid="uid://bv6kbobq5gbe8" path="res://SkyShader/box5.png" id="3_diioh"]
+[ext_resource type="Script" uid="uid://dc0xjh71ib1m7" path="res://Scenes/MainCam.gd" id="4_ilrr5"]
+[ext_resource type="PackedScene" uid="uid://b1ifm0554gtdb" path="res://addons/boujie_water_shader/prefabs/outset_ocean.tscn" id="5_8e3lk"]
+[ext_resource type="Script" uid="uid://dsl2p21gugq8e" path="res://FloatClass/classFloatingRB.gd" id="6_5frun"]
+[ext_resource type="PackedScene" uid="uid://cmc2myvfq1ev" path="res://Scenes/tentical/boat.blend" id="7_h0txe"]
+[ext_resource type="PackedScene" uid="uid://dobffdpywqmjx" path="res://UI/startOverlay.tscn" id="8_diioh"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kd4wp"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_21xkr"]
+noise = SubResource("FastNoiseLite_kd4wp")
+color_ramp = ExtResource("2_h0txe")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qpmrf"]
+shader = ExtResource("1_niwwa")
+shader_parameter/Texture2DParameter = ExtResource("3_diioh")
+shader_parameter/Vector2Parameter2 = Vector2(0, 0)
+shader_parameter/SkyTexture = SubResource("NoiseTexture2D_21xkr")
+
+[sub_resource type="Sky" id="Sky_6bp64"]
+sky_material = SubResource("ShaderMaterial_qpmrf")
+
+[sub_resource type="Environment" id="Environment_5bf1m"]
+background_mode = 2
+sky = SubResource("Sky_6bp64")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_niwwa"]
+size = Vector3(26.978394, 14.352188, 20)
+
+[node name="Tittle Screen" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5bf1m")
+
+[node name="OutsetOcean" parent="." groups=["water"] instance=ExtResource("5_8e3lk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31085634, 0, 0.45859802)
+
+[node name="FloatingRigidBody3d" type="RigidBody3D" parent="." node_paths=PackedStringArray("floatiesnode")]
+mass = 500000.0
+script = ExtResource("6_5frun")
+floatiesnode = NodePath("floats")
+metadata/_custom_type_script = "uid://dsl2p21gugq8e"
+
+[node name="boat" parent="FloatingRigidBody3d" instance=ExtResource("7_h0txe")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloatingRigidBody3d"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.28418, 6.944363, 0.08468604)
+shape = SubResource("BoxShape3D_niwwa")
+
+[node name="floats" type="Marker3D" parent="FloatingRigidBody3d"]
+
+[node name="float22" type="Marker3D" parent="FloatingRigidBody3d/floats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2513008, -0.48473597, 8.679855)
+
+[node name="float24" type="Marker3D" parent="FloatingRigidBody3d/floats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.357578, -0.48473597, -8.697075)
+
+[node name="float25" type="Marker3D" parent="FloatingRigidBody3d/floats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6837139, -0.48473597, -9.055001)
+
+[node name="float27" type="Marker3D" parent="FloatingRigidBody3d/floats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.970604, -0.48473597, 8.42462)
+
+[node name="float23" type="Marker3D" parent="FloatingRigidBody3d/floats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2513008, 3.6603255, 8.679855)
+
+[node name="float26" type="Marker3D" parent="FloatingRigidBody3d/floats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.357578, 3.6603255, -8.697075)
+
+[node name="float28" type="Marker3D" parent="FloatingRigidBody3d/floats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6837139, 3.6603255, -9.055001)
+
+[node name="float29" type="Marker3D" parent="FloatingRigidBody3d/floats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.970604, 3.6603255, 8.42462)
+
+[node name="Camera3D" type="Camera3D" parent="FloatingRigidBody3d" groups=["camera"]]
+transform = Transform3D(-0.083942205, -0.4677718, 0.87985414, 0.02266033, 0.8818461, 0.47099268, -0.99621296, 0.05947395, -0.06342424, 7.7548056, 8.971138, 0.49402)
+script = ExtResource("4_ilrr5")
+
+[node name="RayCast3D" type="RayCast3D" parent="FloatingRigidBody3d/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LostPopUp" parent="CanvasLayer" instance=ExtResource("8_diioh")]
+offset_top = 298.0

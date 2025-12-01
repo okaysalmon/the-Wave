@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://djeco58r7c8mn"
+path="res://.godot/imported/Retro Action Loop #3.wav-59ba1d61524903db16e5d06f1272d72a.sample"
+
+[deps]
+
+source_file="res://Retro Action Loop #3.wav"
+dest_files=["res://.godot/imported/Retro Action Loop #3.wav-59ba1d61524903db16e5d06f1272d72a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
